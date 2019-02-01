@@ -6,13 +6,11 @@ html(lang="en")
   title testing
   body
     main
-        a.waves-effect.waves-light.btn.modal-trigger(href='#modal1') Modal
-        #modal1.modal
-          .modal-content
-            h4 Modal Header
-            p(style="float:left;width: 10%;min-width: 50px; margin-right: 1em")
-            p#categoryId Id : 
-            p(style="float:left;width: 10%;min-width: 50px; margin-right: 1em")
-            p#nama Name: 
-          .modal-footer
-            a.modal-close.waves-effect.waves-green.btn-flat(href='#!') Agree
+      a.waves-effect.waves-light.btn.modal-trigger(href='#modal1') Modal
+      #modal1.modal
+        .modal-content
+          h4 Modal Header
+          img#gambar.activator.responsive-img(src='/', alt='Categories',
+          style='width:100%;height:14.8em;object-fit: cover;')
+        .modal-footer
+          a.modal-close.waves-effect.waves-green.btn-flat(href='#!') Agree

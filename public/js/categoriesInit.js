@@ -11,11 +11,7 @@ async function categoriesReq() {
 }
 
 function loadCategories() {
-
-  for (i in categoriesData) {
-    document.getElementById('categoryId').firstChild.textContent = categoriesData[i]._id;
-    document.getElementById('nama').firstChild.textContent = categoriesData[i].name;
-  }
+  document.getElementById('gambar').src = `http://192.168.0.30:3000/public/img/categories/${categoriesData[2].mainImage}`
 }
 
 document.addEventListener('DOMContentLoaded', async function() {
