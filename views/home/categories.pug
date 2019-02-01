@@ -2,10 +2,17 @@ doctype html
 html(lang="en")
   include ../includes/head.pug
   script(defer src= 'public/js/categoriesInit.js')
+  include ../includes/script.pug
   title testing
   body
     main
-        p(style="float:left;width: 10%;min-width: 50px; margin-right: 1em")  Id 
-        p#categoryId -
-        p(style="float:left;width: 10%;min-width: 50px; margin-right: 1em")  Nama 
-        p#nama -
+        a.waves-effect.waves-light.btn.modal-trigger(href='#modal1') Modal
+        #modal1.modal
+          .modal-content
+            h4 Modal Header
+            p(style="float:left;width: 10%;min-width: 50px; margin-right: 1em")
+            p#categoryId Id : 
+            p(style="float:left;width: 10%;min-width: 50px; margin-right: 1em")
+            p#nama Name: 
+          .modal-footer
+            a.modal-close.waves-effect.waves-green.btn-flat(href='#!') Agree
