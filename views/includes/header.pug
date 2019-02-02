@@ -1,0 +1,25 @@
+.navbar-fixed
+  nav(role="navigation" class= `${colorTheme}`)
+    .nav-wrapper.container
+      a#logo-container.brand-logo(href='/')=judul
+        //- i.large.material-icons explore
+      ul.right.hide-on-med-and-down
+        li 
+          a.tooltipped(href='/' data-tooltip="Menu utama") Home
+        li 
+          a.tooltipped(href=kategoriKapal data-tooltip="Temui para desainer yang sesuai dengan kebutuhanmu") Designer
+        li 
+          a.tooltipped(href=about data-tooltip="Kenali kami lebih jauh") About
+        li 
+          a.waves-effect.waves-light.btn.modal-trigger#authStatus(href='#modal_login' class= `${colorTheme}` ) Login
+      ul#nav-mobile.sidenav
+        li
+          a.waves-effect.waves-light.btn.modal-trigger#authStatusMobile(href='#modal_login' class= `${colorTheme}`) Login
+        li 
+          a(href='/') Home
+        li 
+          a(href=kategoriKapal) Categories
+        li 
+          a(href=about) About
+      a.sidenav-trigger(href='#' data-target='nav-mobile')
+        i.material-icons menu
