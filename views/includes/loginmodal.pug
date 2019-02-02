@@ -1,0 +1,23 @@
+// Modal Structure
+#modal_login.modal
+  .modal-content
+    h4.header.center.dark-text.text-lighten-2 Login
+    form(action=loginAction, method="post",onsubmit=" loginAction();return false;")
+      .container
+        label(for='uname')
+          b E-mail
+        input(type='text' placeholder='Enter E-mail' name='email' required='')#txt_email
+        label(for='psw')
+          b Password
+        input(type='password' placeholder='Enter Password' name='password' required='')#txt_pw
+        p
+          label
+            input(type="checkbox")#rememberChk
+            span Ingat saya.
+            button(type='submit' class= `${colorTheme}`).waves-light.btn.right Login
+            
+              
+
+        a(href=registrasi).left Belum punya akun?
+        a.modal-close.waves-effect.waves-light.btn-flat(href='#').right  Cancel
+    .modal-footer

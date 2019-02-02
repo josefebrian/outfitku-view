@@ -7,9 +7,9 @@
         li 
           a.tooltipped(href='/' data-tooltip="Menu utama") Home
         li 
-          a.tooltipped(href=kategoriKapal data-tooltip="Temui para desainer yang sesuai dengan kebutuhanmu") Designer
+          a.tooltipped(href=link.designer data-tooltip="Temui para desainer yang sesuai dengan kebutuhanmu") Desainer
         li 
-          a.tooltipped(href=about data-tooltip="Kenali kami lebih jauh") About
+          a.tooltipped(href=link.about data-tooltip="Kenali kami lebih jauh") About
         li 
           a.waves-effect.waves-light.btn.modal-trigger#authStatus(href='#modal_login' class= `${colorTheme}` ) Login
       ul#nav-mobile.sidenav
@@ -18,8 +18,10 @@
         li 
           a(href='/') Home
         li 
-          a(href=kategoriKapal) Categories
+          a(href=link.designer) Desainer
         li 
-          a(href=about) About
+          a(href=link.about) About
       a.sidenav-trigger(href='#' data-target='nav-mobile')
         i.material-icons menu
+    
+
