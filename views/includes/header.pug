@@ -11,7 +11,10 @@
         li 
           a.tooltipped(href=link.about data-tooltip="Kenali kami lebih jauh") About
         li 
-          a.waves-effect.waves-light.btn.modal-trigger#authStatus(href='#modal_login' class= `${colorTheme}` ) Login
+          if user
+            a.waves-effect.waves-light.btn.modal-trigger#authStatus(href=`${user.name}` class= `${colorTheme}` ) Login
+          else
+            a.waves-effect.waves-light.btn.modal-trigger#authStatus(href='#modal_login' class= `${colorTheme}` ) Login
       ul#nav-mobile.sidenav
         li
           a.waves-effect.waves-light.btn.modal-trigger#authStatusMobile(href='#modal_login' class= `${colorTheme}`) Login

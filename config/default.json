@@ -1,0 +1,5 @@
+{
+    "APIServer": "http://localhost:3000/api",
+    "getImg": "/public/img/",
+    "saveImg": "./public/img/"
+}

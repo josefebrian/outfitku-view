@@ -2,19 +2,19 @@
 #modal_login.modal
   .modal-content
     h4.header.center.dark-text.text-lighten-2 Login
-    form(action=loginAction, method="post",onsubmit=" loginAction();return false;")
+    form(action="/login", method="post")
       .container
-        label(for='uname')
+        label(for='email')
           b E-mail
         input(type='text' placeholder='Enter E-mail' name='email' required='')#txt_email
-        label(for='psw')
+        label(for='password')
           b Password
         input(type='password' placeholder='Enter Password' name='password' required='')#txt_pw
         p
           label
             input(type="checkbox")#rememberChk
             span Ingat saya.
-            button(type='submit' class= `${colorTheme}`).waves-light.btn.right Login
+            button(type='submit' name='remember' class= `${colorTheme}`).waves-light.btn.right Login
             
               
 

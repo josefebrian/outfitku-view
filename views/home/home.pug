@@ -3,7 +3,6 @@ head
   include ../includes/head.pug
   include ../includes/loginmodal.pug
   include ../includes/script.pug
-  script(defer src= 'public/js/categoriesInit.js')
   title Document
 body
   include ../includes/header.pug
@@ -59,7 +58,7 @@ body
                       .card-image.waves-effect.waves-block.waves-light
                         img#gambar.activator.responsive-img(src=link.imgCDN+'site/thumbs/designer-2.jpg', alt='nopic', onerror="this.onerror=null;this.src='/public/img/site/noshippic.png';", style='width:100%;height:14.8em;object-fit: cover;')
                       .card-content
-                        span#nama.card-title.activator.text-darken-4(class='${htmlColor}-text') Navigasi Akurat
+                        span#nama.card-title.activator.text-darken-4(class='${htmlColor}-text') Hasil Akurat
                       .card-reveal
                         span#model.card-title.text-darken-4(class='${htmlColor}-text')
                           | Navigasi
