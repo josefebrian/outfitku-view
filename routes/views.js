@@ -25,6 +25,7 @@ let defaultSiteValues = {
 
 router.get('/', auth, async (req, res) => {
   let pageVariables = Object.assign(defaultSiteValues, { user: req.user });
+  console.log(req.user.name);
 
   try {
     const result = await axios.get(apiServer + '/categories')
