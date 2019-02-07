@@ -14,5 +14,5 @@ module.exports = function (app) {
 
 
   app.use('', views);
-  app.use('/login', auth);
+  app.use('', auth);
 };

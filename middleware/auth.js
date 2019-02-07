@@ -6,8 +6,9 @@ const apiServer = config.get('APIServer');
 
 module.exports = async function auth(req, res, next) {
 
+
   const token = req.cookies.x_auth_token;
-  // console.log(token);
+  if (!token && req.authPass) return next();
   if (!token) return res.status(401).send('Access denied. No token provided'); //nanti ganti pake pug
 
   try {

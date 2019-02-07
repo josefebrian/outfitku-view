@@ -12,7 +12,7 @@
           a.tooltipped(href=link.about data-tooltip="Kenali kami lebih jauh") About
         li 
           if user
-            a.waves-effect.waves-light.btn.modal-trigger#authStatus(href=`/${user._id}` class= `${colorTheme}` )=`${user.name}`
+            a.waves-effect.waves-light.btn.modal-trigger#authStatus(href=`/profile` class= `${colorTheme}` )=`${user.name}`
           else
             a.waves-effect.waves-light.btn.modal-trigger#authStatus(href='#modal_login' class= `${colorTheme}` ) Login
       ul#nav-mobile.sidenav
