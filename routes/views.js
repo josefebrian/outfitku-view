@@ -8,7 +8,7 @@ const apiServer = config.get('APIServer');
 
 
 let defaultSiteValues = {
-  judul: 'OUTFITKU',
+  siteName: 'Outfitku',
   categories: '/categories',
   colorTheme: 'blue-grey darken-3',
   colorThemeText: 'teal',
@@ -16,6 +16,7 @@ let defaultSiteValues = {
 
   link: {
     imgCDN: 'http://localhost:3000/public/img/',
+    imgCDNCategories: 'http://localhost:3000/public/img/categories/',
     designer: '/designers',
     about: '/about',
 
@@ -52,7 +53,38 @@ router.get('/profile', auth, async (req, res) => {
   };
 });
 
+router.get('/profile/create_business', auth, async (req, res) => {
+  try {
 
+
+    const categories = await axios.get(apiServer + '/categories');
+
+    let pageVariables = Object.assign(defaultSiteValues, { user: req.user, categories: categories.data });
+    // console.log(pageVariables.link.imgCDtegories + categories.data[0].mainImage);NCa
+
+    const result = await axios.get(apiServer + '/users/' + req.user._id)
+    pageVariables = Object.assign(defaultSiteValues, req.user, { upPageLevel: '../' });
+
+    res.render('./profile/create_business', pageVariables);
+  }
+  catch (err) {
+    res.status(err.response.status).send(err.response.data)
+  };
+});
+
+router.post('/profile/create_business', auth, async (req, res) => {
+  try {
+
+    const designer = await axios.post(apiServer + '/designers/', req.body);
+
+
+    res.send(req.body)
+    // res.render('./profile/create_business', pageVariables);
+  }
+  catch (err) {
+    res.status(err.response.status).send('error: ' + err.response.data)
+  };
+});
 
 //FOR TESTING PURPOSE
 router.get('/template', async (req, res) => {

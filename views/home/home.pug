@@ -3,7 +3,7 @@ head
   include ../includes/head.pug
   include ../includes/loginmodal.pug
   include ../includes/script.pug
-  title Document
+  title #{siteName} - Document
 body
   include ../includes/header.pug
   main
@@ -17,7 +17,7 @@ body
               //- i.medium.material-icons(style="text-shadow: 0px 6px 10px #0000002e;")=judul
               //- //- span(style="text-shadow: 0px 6px 10px #0000002e;")=judul
           .row.center
-            h1.white-text.text-lighten-2(style="text-shadow: 0px 3px 1px #0000002e;")=judul
+            h1.white-text.text-lighten-2(style="text-shadow: 0px 3px 1px #0000002e;") #{siteName.toUpperCase()}
             h5.header.col.s12.light.white-text.text-lighten-2(style="text-shadow: 0px 3px 1px #0000002e;") "Mulai, Rangkai, Nilai, Pakai"
           .row.center
             a#download-button.btn-large.waves-effect.waves-light.lighten-1(href=link.designer class= `${colorTheme}`) mulai

@@ -20,6 +20,8 @@ router.post('/login', async (req, res) => {
     })
     // console.log(result.data);
 
+    axios.defaults.headers.common["x-auth-token"] = result.data;
+
     if (req.body.remember) {
       res.cookie('x_auth_token', result.data, { maxAge: 86400000 });
     }
