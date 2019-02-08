@@ -20,9 +20,9 @@ body
             h1.white-text.text-lighten-2(style="text-shadow: 0px 3px 1px #0000002e;") #{designer.businessName.toUpperCase()}
             h5.header.col.s12.light.white-text.text-lighten-2(style="text-shadow: 0px 3px 1px #0000002e;") #{designer.businessAddress.toUpperCase()}
           .row.center
-            a#download-button.btn-large.waves-effect.waves-light.lighten-1(href=link.designer class= `${colorTheme}`) Mulai Desain
+            a#download-button.btn-large.waves-effect.waves-light.lighten-1(href=link.order class= `${colorTheme}`) Mulai Desain
         .parallax
-          img.responsive-img(src=link.imgCDN+designer.picture alt='Background Image' onerror="this.onerror=null;this.src='/public/img/site/default-pic-designer.jpg';")
+          img.responsive-img(src=link.imgCDN+'designers/'+designer._id+'/'+designer.picture alt='Background Image' onerror="this.onerror=null;this.src='/public/img/site/default-pic-designer.jpg';")
     .container.center
       .section
         .row
