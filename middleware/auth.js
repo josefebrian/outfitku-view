@@ -20,7 +20,7 @@ module.exports = async function auth(req, res, next) {
       headers: {
         'x-auth-token': token,
       },
-      url: apiServer + '/users/me'
+      url: apiServer + '/users/profile'
     })
     req.user = decoded.data;
     axios.defaults.headers.common["x-auth-token"] = token;

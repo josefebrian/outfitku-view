@@ -9,7 +9,7 @@ const config = require('config');
 const apiServer = config.get('APIServer');
 
 router.post('/login', async (req, res) => {
-  // console.log(req.cookies.x_auth_token)
+  // console.log(req.cookies.x_auth_token)0
   //send api req
   const userUrl = apiServer + '/auth'
 

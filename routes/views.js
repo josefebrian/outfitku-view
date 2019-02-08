@@ -19,6 +19,7 @@ let defaultSiteValues = {
     imgCDNCategories: 'http://localhost:3000/public/img/categories/',
     designer: '/designers',
     about: '/about',
+    register: 'register'
 
   }
 }
@@ -28,6 +29,32 @@ router.get('/', authPass, auth, async (req, res) => {
   let pageVariables = Object.assign(defaultSiteValues, { user: req.user });
 
   res.render('./home/home', pageVariables);
+
+});
+router.get('/register', authPass, auth, async (req, res) => {
+
+  if (req.user) return res.send('anda sudah terdaftar');
+  let pageVariables = Object.assign(defaultSiteValues, { user: req.user });
+
+  res.render('./profile/register', pageVariables);
+
+});
+router.post('/register', authPass, auth, async (req, res) => {
+  try {
+    console.log(req.body);
+
+    let pageVariables = Object.assign(defaultSiteValues, { user: req.body });
+
+    const newUser = await axios.post(apiServer + '/users/', req.body);
+    pageVariables = Object.assign(defaultSiteValues, req.user);
+    console.log(req.body.name);
+
+    res.render('./profile/register_success', pageVariables);
+  }
+  catch (err) {
+    res.status(err.response.status).send(err.response.data)
+  };
+
 
 });
 router.get('/designers', authPass, auth, async (req, res) => {

@@ -9,3 +9,14 @@ body {
 main {
   flex: 1 0 auto;
 } */
+
+.datepicker-date-display { background-color: #263238; }
+.datepicker-day.picker__day--today { color: 78909c; }
+.datepicker-day--selected, .picker__day--selected:hover,
+.datepicker-table td.is-selected{ background-color: #263238}
+.picker--focused .picker__day--selected { background-color: #263238;}
+.datepicker-cancel, .datepicker-clear, .datepicker-today, .datepicker-done{color:#263238;}
+.clockpicker-tick:hover { background: #6d4e7a !important; }
+.clockpicker-canvas line { stroke: #7f2ca3 !important; }
+.clockpicker-canvas-bearing { fill: #6d4e7a !important; }
+.clockpicker-canvas-bg { fill: #6d4e7a !important; }

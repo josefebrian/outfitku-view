@@ -1,0 +1,15 @@
+html(lang="en")
+include ../includes/head.pug
+  include ../includes/script.pug
+  title Logout
+body
+  main
+    .container.center
+
+      h3 Registrasi sukses.
+      p registrasi dengan nama 
+      b #{user.name}
+      p berhasil.
+      p Silahkan melakukan login di halaman utama.
+      .btn(class= `${colorTheme}`)
+        a(href= "/" ) kembali ke halaman utama
