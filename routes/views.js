@@ -31,6 +31,7 @@ router.get('/', authPass, auth, async (req, res) => {
   res.render('./home/home', pageVariables);
 
 });
+
 router.get('/register', authPass, auth, async (req, res) => {
 
   if (req.user) return res.send('anda sudah terdaftar');
@@ -39,6 +40,7 @@ router.get('/register', authPass, auth, async (req, res) => {
   res.render('./profile/register', pageVariables);
 
 });
+
 router.post('/register', authPass, auth, async (req, res) => {
   try {
     console.log(req.body);
@@ -57,11 +59,36 @@ router.post('/register', authPass, auth, async (req, res) => {
 
 
 });
+
 router.get('/designers', authPass, auth, async (req, res) => {
-  let pageVariables = Object.assign(defaultSiteValues, { user: req.user });
+  try {
 
-  res.render('./designers/designers', pageVariables);
+    const designers = await axios.get(apiServer + '/designers/');
+    console.log(designers);
 
+    let pageVariables = Object.assign(defaultSiteValues, { user: req.user, designers: designers.data });
+
+    // res.send(designers.data)
+    res.render('./designers/designers', pageVariables);
+  }
+  catch (err) {
+    res.status(err.response.status).send('error: ' + err.response.data)
+  };
+});
+
+router.get('/designers/:id', authPass, auth, async (req, res) => {
+  try {
+    const designer = await axios.get(apiServer + '/designers/' + req.params.id);
+    let pageVariables = Object.assign(defaultSiteValues, { user: req.user, designer: designer.data, upPageLevel: '../' });
+
+
+
+    // res.send(templateItem.data)
+    res.render('./designers/designer_page', pageVariables);
+  }
+  catch (err) {
+    res.status(err.response.status).send('error: ' + err.response.data)
+  };
 });
 
 router.get('/profile', auth, async (req, res) => {
@@ -119,6 +146,19 @@ router.get('/template', async (req, res) => {
   res.render('./materialize-template/aaa.html', pageVariables);
 
 });
+//TEMPLATE ROUTE
+router.get('/templateRoute', auth, async (req, res) => {
+  try {
+    let pageVariables = Object.assign(defaultSiteValues, { user: req.user });
+    const templateItem = await axios.get(apiServer + '/templateItem/');
 
+
+    res.send(templateItem.data)
+    // res.render('./xxxx/xxxx', pageVariables);
+  }
+  catch (err) {
+    res.status(err.response.status).send('error: ' + err.response.data)
+  };
+});
 
 module.exports = router;
