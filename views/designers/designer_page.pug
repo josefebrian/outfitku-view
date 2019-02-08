@@ -28,11 +28,11 @@ body
         .row
             .col.s12
               h4='Tentang '+ designer.businessName
-              p #{designer.businessAddress}
-              p #{designer.businessEmail}
-              p 
+              p alamat: #{designer.businessAddress}
+              p email: #{designer.businessEmail}
+              p keahlian: 
                 each skill in designer.expertise
-                  p #{skill.name} 
+                  span #{skill.name} 
               p #{designer.xxxxx}
       .section
         .row

@@ -43,13 +43,13 @@ router.get('/register', authPass, auth, async (req, res) => {
 
 router.post('/register', authPass, auth, async (req, res) => {
   try {
-    console.log(req.body);
+    // console.log(req.body);
 
     let pageVariables = Object.assign(defaultSiteValues, { user: req.body });
 
     const newUser = await axios.post(apiServer + '/users/', req.body);
     pageVariables = Object.assign(defaultSiteValues, req.user);
-    console.log(req.body.name);
+    // console.log(req.body.name);
 
     res.render('./profile/register_success', pageVariables);
   }
@@ -64,7 +64,7 @@ router.get('/designers', authPass, auth, async (req, res) => {
   try {
 
     const designers = await axios.get(apiServer + '/designers/');
-    console.log(designers);
+    // console.log(designers.data);
 
     let pageVariables = Object.assign(defaultSiteValues, { user: req.user, designers: designers.data });
 
@@ -114,7 +114,7 @@ router.get('/profile/create_business', auth, async (req, res) => {
     const categories = await axios.get(apiServer + '/categories');
 
     let pageVariables = Object.assign(defaultSiteValues, { user: req.user, categories: categories.data });
-    // console.log(pageVariables.link.imgCDtegories + categories.data[0].mainImage);NCa
+    // console.log(pageVariables.link.imgCDtegories + categories.data[0].mainImage);
 
     const result = await axios.get(apiServer + '/users/' + req.user._id)
     pageVariables = Object.assign(defaultSiteValues, req.user, { upPageLevel: '../' });
@@ -128,12 +128,11 @@ router.get('/profile/create_business', auth, async (req, res) => {
 
 router.post('/profile/create_business', auth, async (req, res) => {
   try {
-
     const designer = await axios.post(apiServer + '/designers/', req.body);
 
+    // res.send(axios.defaults.headers.common)
 
-    res.send(req.body)
-    // res.render('./profile/create_business', pageVariables);
+    res.redirect('../designers/' + designer.data._id);
   }
   catch (err) {
     res.status(err.response.status).send('error: ' + err.response.data)

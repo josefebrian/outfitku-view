@@ -23,10 +23,10 @@ router.post('/login', async (req, res) => {
     axios.defaults.headers.common["x-auth-token"] = result.data;
 
     if (req.body.remember) {
-      res.cookie('x_auth_token', result.data, { maxAge: 86400000 });
+      res.cookie('x-auth-token', result.data, { maxAge: 86400000 });
     }
     else {
-      res.cookie('x_auth_token', result.data, { maxAge: 518400000 });
+      res.cookie('x-auth-token', result.data, { maxAge: 518400000 });
     }
 
     res.redirect('/');
@@ -38,7 +38,7 @@ router.post('/login', async (req, res) => {
 
 });
 router.get('/logout', async (req, res) => {
-  res.clearCookie("x_auth_token")
+  res.clearCookie("x-auth-token")
   delete req.user
   res.render('./profile/logout', {
     judul: 'OUTFITKU',
