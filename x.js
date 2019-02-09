@@ -5,6 +5,9 @@ const config = require('config');
 const auth = require('../middleware/auth');
 const authPass = require('../middleware/authPass');
 const apiServer = config.get('APIServer');
+const _ = require('lodash');
+const multer = require('multer')
+const FormData = require('form-data');
 
 
 let defaultSiteValues = {
@@ -16,15 +19,16 @@ let defaultSiteValues = {
 
   link: {
     imgCDN: config.get('imgCDN'),
-    imgCDNCategories: config.get('imgCDN') + 'categories',
+    imgCDNCategories: config.get('imgCDN') + 'categories/',
     designer: '/designers',
     order: '/order',
     about: '/about',
-    register: 'register'
-
+    register: 'register',
+    apiServer: config.get('APIServer')
   }
 }
 
+const upload = multer()
 
 router.get('/', authPass, auth, async (req, res) => {
   let pageVariables = Object.assign(defaultSiteValues, { user: req.user });
@@ -90,16 +94,22 @@ router.get('/designers/:id', authPass, auth, async (req, res) => {
 });
 
 router.get('/profile', auth, async (req, res) => {
-  let pageVariables = Object.assign(defaultSiteValues, { user: req.user });
-  // console.log(req.user.name);
+  let pageVariables = Object.assign(defaultSiteValues, { user: req.user, hasBusiness: false });
 
   try {
-    const result = await axios.get(apiServer + '/users/' + req.user._id)
-    pageVariables = Object.assign(defaultSiteValues, req.user);
-    // console.log(result);
+    const ownerOf = await axios.get(apiServer + '/designers/owner')
 
-    res.render('./profile/profile', pageVariables);
+
+    pageVariables = Object.assign(defaultSiteValues, req.user);
+    console.log('1', ownerOf.data);
+
+    if (ownerOf.data) {
+      console.log('2', ownerOf.data);
+      pageVariables = Object.assign(pageVariables, { business: ownerOf.data, hasBusiness: true });
+      return res.render('./profile/profile', pageVariables);
+    } else return res.render('./profile/profile', pageVariables);
   } catch (err) {
+    console.log(ownerOf.data);
     res.status(err.response.status).send(err.response.data)
   };
 });
@@ -134,26 +144,47 @@ router.post('/profile/create_business', auth, async (req, res) => {
   };
 });
 
-router.get('/designers/:id/orders', auth, async (req, res) => {
+router.get('/designers/:id/admin', auth, async (req, res) => {
   try {
-    const categories = await axios.get(apiServer + '/categories');
-
     const designer = await axios.get(apiServer + '/designers/' + req.params.id);
 
-    const order = await axios.post(apiServer + '/orders/', { designer: req.params.id });
+    let pageVariables = Object.assign(defaultSiteValues, { user: req.user, designer: designer.data, upPageLevel: '../../' });
+    // console.log(req.user._id != designer.data.account.owner._id);
 
-    let pageVariables = Object.assign(defaultSiteValues, { user: req.user, designer: designer.data, categories: categories.data, order: order.data, upPageLevel: '../../' });
+    if (req.user._id != designer.data.account.owner._id) return res.status(403).send('unauthorized')
 
     // res.send(templateItem.data)
-    res.render('./designers/inputOrder', pageVariables);
+    res.render('./designers/designer_backend', pageVariables);
   } catch (err) {
     res.status(err.response.status).send('error: ' + err.response.data)
   };
 });
 
-// pisahin post pake view yang lain
+router.post('/designers/:id/picture', [auth, upload.single('picture')], async (req, res) => {
+  try {
+    const formData = new FormData();
+    formData.append('picture', `${req.file.originalname}`);
+    formData.append('picture', 'picture', `${req.file.originalname}`, req.file.buffer);
+    const newHeader = Object.assign(axios.defaults.headers.common, formData.getHeaders());
+    const postUrl = apiServer + '/designers/' + req.params.id + '/picture'
+    console.log(formData);
 
-router.post('/designers/:id/orders', auth, async (req, res) => {
+
+    let pageVariables = Object.assign(defaultSiteValues, { user: req.user, upPageLevel: '../../' });
+    const result = await axios.post(postUrl, formData, { headers: newHeader });
+
+    //ATURRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRW
+
+    res.send('ok')
+    // res.render('./xxxx/xxxx', pageVariables);
+  } catch (err) {
+
+    if (!err.response.status) return res.send(err.response.data);
+    res.status(err.response.status).send('error: ' + err.response.data)
+  };
+});
+
+router.post('/designers/:id/order', auth, async (req, res) => {
   try {
     const designer = await axios.get(apiServer + '/designers/' + req.params.id);
 
@@ -161,7 +192,7 @@ router.post('/designers/:id/orders', auth, async (req, res) => {
 
     let pageVariables = Object.assign(defaultSiteValues, { user: req.user, designer: designer.data, order: order.data, upPageLevel: '../../' });
 
-    res.render('./designers/viewOrder', pageVariables)
+    res.render('./designers/createOrder', pageVariables)
   } catch (err) {
     res.status(err.response.status).send('error: ' + err.response.data)
   };
@@ -174,7 +205,7 @@ router.get('/designers/:id/orders/:orderId', auth, async (req, res) => {
     let pageVariables = Object.assign(defaultSiteValues, { user: req.user, order: order.data, designer: designer.data, upPageLevel: '../../../' });
 
     // res.send(templateItem.data)
-    res.render('./designers/inputOrder', pageVariables);
+    res.render('./designers/viewOrder', pageVariables);
   } catch (err) {
     res.status(err.response.status).send('error: ' + err.response.data)
   };
