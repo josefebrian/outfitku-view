@@ -3,7 +3,7 @@ head
   include ../includes/head.pug
   include ../includes/loginmodal.pug
   include ../includes/script.pug
-  include loginOrder.pug
+
   title #{siteName} - #{designer.businessName}
 body
   include ../includes/header.pug
@@ -23,7 +23,7 @@ body
           .row.center
             a#download-button.btn-large.waves-effect.waves-light.lighten-1(href=designer._id+'/orders' class= `${colorTheme}`) Mulai Desain
         .parallax
-          img.responsive-img(src=link.imgCDN+'designers/'+designer._id+'/'+designer.picture alt='Background Image' onerror="this.onerror=null;this.src='/public/img/site/default-pic-designer.jpg';")
+          img.responsive-img(src=link.imgCDN+'designers/'+designer._id+'/main/'+designer.picture alt='Background Image' onerror="this.onerror=null;this.src='/public/img/site/default-pic-designer.jpg';")
     .container.center
       .section
         .row

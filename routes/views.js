@@ -6,6 +6,9 @@ const auth = require('../middleware/auth');
 const authPass = require('../middleware/authPass');
 const apiServer = config.get('APIServer');
 const _ = require('lodash');
+const multer = require('multer')
+const FormData = require('form-data');
+
 
 let defaultSiteValues = {
   siteName: 'Outfitku',
@@ -25,6 +28,7 @@ let defaultSiteValues = {
   }
 }
 
+const upload = multer()
 
 router.get('/', authPass, auth, async (req, res) => {
   let pageVariables = Object.assign(defaultSiteValues, { user: req.user });
@@ -160,18 +164,27 @@ router.get('/designers/:id/admin', auth, async (req, res) => {
   };
 });
 
-router.post('/designers/:id/picture', auth, async (req, res) => {
+router.post('/designers/:id/picture', [auth, upload.single('picture')], async (req, res) => {
   try {
+    const formData = new FormData();
+    formData.append('picture', `${req.file.originalname}`);
+    formData.append('picture', 'picture', `${req.file.originalname}`, req.file.buffer);
+    const newHeader = Object.assign(axios.defaults.headers.common, formData.getHeaders());
+    const postUrl = apiServer + '/designers/' + req.params.id + '/picture'
+    console.log(formData);
+
+
     let pageVariables = Object.assign(defaultSiteValues, { user: req.user, upPageLevel: '../../' });
-    // const designers = await axios.get(link.apiServer + '/designers')
-    console.log(req.files);
+    const result = await axios.post(postUrl, formData, { headers: newHeader });
 
-    //ATURRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRW
+    //ATURRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRW
 
-    res.send(req.body)
+    res.send('ok')
     // res.render('./xxxx/xxxx', pageVariables);
   }
   catch (err) {
+
+    if (!err.response.status) return res.send(err.response.data);
     res.status(err.response.status).send('error: ' + err.response.data)
   };
 });

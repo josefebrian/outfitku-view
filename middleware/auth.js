@@ -26,7 +26,7 @@ module.exports = async function auth(req, res, next) {
 
     next();
   } catch (ex) {
-    console.log(ex.response.data)
+
     req.user = false; // nanti ganti pake pug
     next()
   }
