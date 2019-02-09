@@ -1,0 +1,12 @@
+// Modal Structure
+#modal_order.modal
+  .modal-content
+    h4.header.center.dark-text.text-lighten-2 Order
+    form(action="/designers/"+designer._id+"/order", method="post")
+      .container
+        p Lanjutkan order dengan #{designer.name} ?
+        button.btn.waves-effect.waves-light(type='submit' class= `${colorTheme}` href='/designers/'+designer._id+'/orders')
+          | Buat
+          i.material-icons.right send
+            
+    .modal-footer

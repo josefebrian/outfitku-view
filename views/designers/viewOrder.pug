@@ -1,0 +1,25 @@
+html(lang="en")
+head
+  include ../includes/head.pug
+  include ../includes/loginmodal.pug
+  include ../includes/script.pug
+  title #{siteName} - Form Order
+body
+  include ../includes/header.pug
+  main
+    each message in order.chatLog
+      .container
+        .row
+          p from: #{message.from.name} date: #{message.message.date}
+    
+    
+    .container
+      .row
+        ul#messages
+        form(action='')
+          input#m(autocomplete='off')
+          button Send
+
+
+
+  include ../includes/footer.pug

@@ -17,7 +17,10 @@
             a.waves-effect.waves-light.btn.modal-trigger#authStatus(href='#modal_login' class= `${colorTheme}` ) Login
       ul#nav-mobile.sidenav
         li
-          a.waves-effect.waves-light.btn.modal-trigger#authStatusMobile(href='#modal_login' class= `${colorTheme}`) Login
+          if user
+            a.waves-effect.waves-light.btn.modal-trigger#authStatusMobile(href=`/profile` class= `${colorTheme}` )=`${user.name}`
+          else  
+            a.waves-effect.waves-light.btn.modal-trigger#authStatusMobile(href='#modal_login' class= `${colorTheme}`) Login
         li 
           a(href='/') Home
         li 
@@ -27,4 +30,3 @@
       a.sidenav-trigger(href='#' data-target='nav-mobile')
         i.material-icons menu
     
-
