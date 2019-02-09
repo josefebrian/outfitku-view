@@ -44,13 +44,13 @@ router.get('/register', authPass, auth, async (req, res) => {
 
 router.post('/register', authPass, auth, async (req, res) => {
   try {
-    // console.log(req.body);
+    console.log(req.body);
 
     let pageVariables = Object.assign(defaultSiteValues, { user: req.body });
 
     const newUser = await axios.post(apiServer + '/users/', req.body);
     pageVariables = Object.assign(defaultSiteValues, req.user);
-    // console.log(req.body.name);
+    console.log(req.body.name);
 
     res.render('./profile/register_success', pageVariables);
   } catch (err) {
@@ -64,7 +64,7 @@ router.get('/designers', authPass, auth, async (req, res) => {
   try {
 
     const designers = await axios.get(apiServer + '/designers/');
-    // console.log(designers.data);
+    console.log(designers);
 
     let pageVariables = Object.assign(defaultSiteValues, { user: req.user, designers: designers.data });
 
@@ -116,11 +116,10 @@ router.get('/profile', auth, async (req, res) => {
 router.get('/profile/create_business', auth, async (req, res) => {
   try {
 
-
     const categories = await axios.get(apiServer + '/categories');
 
     let pageVariables = Object.assign(defaultSiteValues, { user: req.user, categories: categories.data });
-    // console.log(pageVariables.link.imgCDtegories + categories.data[0].mainImage);
+    // console.log(pageVariables.link.imgCDtegories + categories.data[0].mainImage);NCa
 
     const result = await axios.get(apiServer + '/users/' + req.user._id)
     pageVariables = Object.assign(defaultSiteValues, req.user, { upPageLevel: '../' });
@@ -133,13 +132,13 @@ router.get('/profile/create_business', auth, async (req, res) => {
 
 router.post('/profile/create_business', auth, async (req, res) => {
   try {
+
     const designer = await axios.post(apiServer + '/designers/', req.body);
 
-    // res.send(axios.defaults.headers.common)
 
-    res.redirect('../designers/' + designer.data._id);
-  }
-  catch (err) {
+    res.send(req.body)
+    // res.render('./profile/create_business', pageVariables);
+  } catch (err) {
     res.status(err.response.status).send('error: ' + err.response.data)
   };
 });
@@ -173,6 +172,19 @@ router.post('/designers/:id/picture', auth, async (req, res) => {
     // res.render('./xxxx/xxxx', pageVariables);
   }
   catch (err) {
+    res.status(err.response.status).send('error: ' + err.response.data)
+  };
+});
+
+router.get('/designers/:id/orders/:orderId', auth, async (req, res) => {
+  try {
+    const designer = await axios.get(apiServer + '/designers/' + req.params.id);
+    const order = await axios.get(apiServer + '/orders/' + req.params.orderId);
+    let pageVariables = Object.assign(defaultSiteValues, { user: req.user, order: order.data, designer: designer.data, upPageLevel: '../../../' });
+
+    // res.send(templateItem.data)
+    res.render('./designers/inputOrder', pageVariables);
+  } catch (err) {
     res.status(err.response.status).send('error: ' + err.response.data)
   };
 });
