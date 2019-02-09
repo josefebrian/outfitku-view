@@ -1,0 +1,75 @@
+html(lang="en")
+head
+  include ../includes/head.pug
+  include ../includes/loginmodal.pug
+  include ../includes/script.pug
+  title Document
+body
+  include ../includes/header.pug
+  main
+    .container
+      h2.center Admin #{designer.businessName} 
+      table.highlight.striped
+        thead
+          tr
+            th Info
+            th Deskripsi
+            th Pengaturan
+        tbody
+          tr
+            td Nama
+            td #{designer.businessName}
+            td 
+              a.btn(href="#" class= `${colorTheme}`) ubah
+          tr
+            td Gambar
+            td #{designer.picture}
+            td 
+              form(action=link.apiServer+"designers/"+designer._id+"/picture" method="post" enctype="multipart/form-data")
+                .file-field.input-field
+                  .btn
+                    span File
+                    input(type='file' accept="image/*" class= `${colorTheme}`)
+                  .file-path-wrapper
+                    input.file-path.validate(type='text')
+                    .row.right
+                      button.btn.waves-effect.waves-light(type='submit' class= `${colorTheme}`)
+                        | Submit
+                        i.material-icons.right send
+        
+          tr
+            td Akun Pengelola
+            td #{designer.account.maintainers}
+            td 
+              a.btn(href="#" class= `${colorTheme}`) ubah
+          tr
+            td Keahlian
+            td 
+              each val in designer.expertise
+                span "#{val.name}" 
+            td 
+              a.btn(href="#" class= `${colorTheme}`) ubah
+          tr
+            td Transaksi
+            td #{designer.works}
+            td 
+              a.btn(href="#" class= `${colorTheme}`) Lihat
+
+      br
+      .center
+        a(href="/admin") Kembali ke Menu
+        div(style="margin-top: 50px;")
+      
+
+    div#pesanan
+
+    div#transactions
+
+    br
+    .center
+      button.waves-effect.waves-light.btn( class= `${colorTheme}`)
+        a(href="/logout" ) logout
+    br
+
+
+    include ../includes/footer.pug

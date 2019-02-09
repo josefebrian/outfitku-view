@@ -29,18 +29,27 @@ body
 
 
     br
-    .center
-      button.waves-effect.waves-light.btn( class= `${colorTheme}`)
-        a(href="/profile/create_business" ) buat akun bisnis
-    br    
+    .container
+      .center
+        if hasBusiness
+          button.waves-effect.waves-light.btn( class= `${colorTheme}`)
+            a(href="/designers/"+business._id ) Lihat halaman #{business.businessName}
+          div
 
-    div#transactions
+          button.waves-effect.waves-light.btn( class= `${colorTheme}`)
+            a(href="/designers/"+business._id+'/admin' ) kelola #{business.businessName}
+        else 
+          button.waves-effect.waves-light.btn( class= `${colorTheme}`)
+            a(href="/profile/create_business" ) buat akun bisnis
+      br    
 
-    br
-    .center
-      button.waves-effect.waves-light.btn( class= `${colorTheme}`)
-        a(href="/logout" ) logout
-    br
+      div#transactions
+
+      br
+      .center
+        button.waves-effect.waves-light.btn( class= `${colorTheme}`)
+          a(href="/logout" ) logout
+      br
 
 
     include ../includes/footer.pug

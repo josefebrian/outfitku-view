@@ -5,7 +5,7 @@ const config = require('config');
 const auth = require('../middleware/auth');
 const authPass = require('../middleware/authPass');
 const apiServer = config.get('APIServer');
-
+const _ = require('lodash');
 
 let defaultSiteValues = {
   siteName: 'Outfitku',
@@ -15,12 +15,12 @@ let defaultSiteValues = {
   upPageLevel: '',
 
   link: {
-    imgCDN: 'http://localhost:3000/public/img/',
-    imgCDNCategories: 'http://localhost:3000/public/img/categories/',
+    imgCDN: config.get('imgCDN'),
+    imgCDNCategories: config.get('imgCDN') + 'categories/',
     designer: '/designers',
     about: '/about',
-    register: 'register'
-
+    register: 'register',
+    apiServer: config.get('APIServer')
   }
 }
 
@@ -92,17 +92,25 @@ router.get('/designers/:id', authPass, auth, async (req, res) => {
 });
 
 router.get('/profile', auth, async (req, res) => {
-  let pageVariables = Object.assign(defaultSiteValues, { user: req.user });
-  // console.log(req.user.name);
+  let pageVariables = Object.assign(defaultSiteValues, { user: req.user, hasBusiness: false });
 
   try {
-    const result = await axios.get(apiServer + '/users/' + req.user._id)
-    pageVariables = Object.assign(defaultSiteValues, req.user);
-    // console.log(result);
+    const ownerOf = await axios.get(apiServer + '/designers/owner')
 
-    res.render('./profile/profile', pageVariables);
+
+    pageVariables = Object.assign(defaultSiteValues, req.user);
+    console.log('1', ownerOf.data);
+
+    if (ownerOf.data) {
+      console.log('2', ownerOf.data);
+      pageVariables = Object.assign(pageVariables, { business: ownerOf.data, hasBusiness: true });
+      return res.render('./profile/profile', pageVariables);
+    }
+
+    else return res.render('./profile/profile', pageVariables);
   }
   catch (err) {
+    console.log(ownerOf.data);
     res.status(err.response.status).send(err.response.data)
   };
 });
@@ -133,6 +141,37 @@ router.post('/profile/create_business', auth, async (req, res) => {
     // res.send(axios.defaults.headers.common)
 
     res.redirect('../designers/' + designer.data._id);
+  }
+  catch (err) {
+    res.status(err.response.status).send('error: ' + err.response.data)
+  };
+});
+
+router.get('/designers/:id/admin', auth, async (req, res) => {
+  try {
+    const designer = await axios.get(apiServer + '/designers/' + req.params.id);
+
+    let pageVariables = Object.assign(defaultSiteValues, { user: req.user, designer: designer.data, upPageLevel: '../../' });
+    // console.log(req.user._id != designer.data.account.owner._id);
+
+    if (req.user._id != designer.data.account.owner._id) return res.status(403).send('unauthorized')
+
+    // res.send(templateItem.data)
+    res.render('./designers/designer_backend', pageVariables);
+  }
+  catch (err) {
+    res.status(err.response.status).send('error: ' + err.response.data)
+  };
+});
+
+router.post('/post_pic', auth, async (req, res) => {
+  try {
+    let pageVariables = Object.assign(defaultSiteValues, { user: req.user });
+    const designers = await axios.get(apiServer + '/designers/')
+    //ATURRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRW
+
+    res.send(templateItem.data)
+    // res.render('./xxxx/xxxx', pageVariables);
   }
   catch (err) {
     res.status(err.response.status).send('error: ' + err.response.data)
