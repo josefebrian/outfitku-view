@@ -25,19 +25,24 @@ body
             td Gambar
             td #{designer.picture}
             td 
-              form(action=link.apiServer+"designers/"+designer._id+"/picture" method="post" enctype="multipart/form-data")
+              form(action="/designers/"+designer._id+"/picture" method="post" enctype="multipart/form-data")
+
+                //- input(type='file' name='myimage')
+                //- input(type='submit' name='submit_image' value='Upload')
+
+
                 .file-field.input-field
                   .btn
                     span File
-                    input(type='file' accept="image/*" class= `${colorTheme}`)
+                    input(type='file' name='picture' accept='image/*' class= `${colorTheme}`)
                   .file-path-wrapper
                     input.file-path.validate(type='text')
-                    .row.right
-                      button.btn.waves-effect.waves-light(type='submit' class= `${colorTheme}`)
-                        | Submit
-                        i.material-icons.right send
-        
-          tr
+                .row.right
+                  button.btn.waves-effect.waves-light(type='submit' class= `${colorTheme}`)
+                    | Submit
+                    i.material-icons.right send
+            
+            tr
             td Akun Pengelola
             td #{designer.account.maintainers}
             td 

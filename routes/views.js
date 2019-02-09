@@ -161,13 +161,15 @@ router.get('/designers/:id/admin', auth, async (req, res) => {
   };
 });
 
-router.post('/post_pic', auth, async (req, res) => {
+router.post('/designers/:id/picture', auth, async (req, res) => {
   try {
-    let pageVariables = Object.assign(defaultSiteValues, { user: req.user });
-    const designers = await axios.get(apiServer + '/designers/')
+    let pageVariables = Object.assign(defaultSiteValues, { user: req.user, upPageLevel: '../../' });
+    // const designers = await axios.get(link.apiServer + '/designers')
+    console.log(req.files);
+
     //ATURRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRW
 
-    res.send(templateItem.data)
+    res.send(req.body)
     // res.render('./xxxx/xxxx', pageVariables);
   }
   catch (err) {
