@@ -18,6 +18,7 @@ let defaultSiteValues = {
     imgCDN: config.get('imgCDN'),
     imgCDNCategories: config.get('imgCDN') + 'categories/',
     designer: '/designers',
+    order: '/order',
     about: '/about',
     register: 'register',
     apiServer: config.get('APIServer')
@@ -52,8 +53,7 @@ router.post('/register', authPass, auth, async (req, res) => {
     // console.log(req.body.name);
 
     res.render('./profile/register_success', pageVariables);
-  }
-  catch (err) {
+  } catch (err) {
     res.status(err.response.status).send(err.response.data)
   };
 
@@ -70,8 +70,7 @@ router.get('/designers', authPass, auth, async (req, res) => {
 
     // res.send(designers.data)
     res.render('./designers/designers', pageVariables);
-  }
-  catch (err) {
+  } catch (err) {
     res.status(err.response.status).send('error: ' + err.response.data)
   };
 });
@@ -85,8 +84,7 @@ router.get('/designers/:id', authPass, auth, async (req, res) => {
 
     // res.send(templateItem.data)
     res.render('./designers/designer_page', pageVariables);
-  }
-  catch (err) {
+  } catch (err) {
     res.status(err.response.status).send('error: ' + err.response.data)
   };
 });
@@ -128,8 +126,7 @@ router.get('/profile/create_business', auth, async (req, res) => {
     pageVariables = Object.assign(defaultSiteValues, req.user, { upPageLevel: '../' });
 
     res.render('./profile/create_business', pageVariables);
-  }
-  catch (err) {
+  } catch (err) {
     res.status(err.response.status).send(err.response.data)
   };
 });
@@ -193,8 +190,7 @@ router.get('/templateRoute', auth, async (req, res) => {
 
     res.send(templateItem.data)
     // res.render('./xxxx/xxxx', pageVariables);
-  }
-  catch (err) {
+  } catch (err) {
     res.status(err.response.status).send('error: ' + err.response.data)
   };
 });
