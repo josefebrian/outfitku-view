@@ -7,7 +7,7 @@ const authPass = require('../middleware/authPass');
 const apiServer = config.get('APIServer');
 const _ = require('lodash');
 const multer = require('multer')
-const FormData = require('form-data');
+const FormData = require('form-data');//https://github.com/axios/axios/issues/1006#issuecomment-320165427
 
 
 let defaultSiteValues = {
@@ -151,7 +151,7 @@ router.get('/designers/:id/admin', auth, async (req, res) => {
   try {
     const designer = await axios.get(apiServer + '/designers/' + req.params.id);
 
-    let pageVariables = Object.assign(defaultSiteValues, { user: req.user, designer: designer.data, upPageLevel: '../../' });
+    let pageVariables = Object.assign(defaultSiteValues, { user: req.user, designer: designer.data, upPageLevel: '../../', postAction: `../../designers/${req.params.id}` });
     // console.log(req.user._id != designer.data.account.owner._id);
 
     if (req.user._id != designer.data.account.owner._id) return res.status(403).send('unauthorized')
@@ -166,25 +166,37 @@ router.get('/designers/:id/admin', auth, async (req, res) => {
 
 router.post('/designers/:id/picture', [auth, upload.single('picture')], async (req, res) => {
   try {
+    //kasih validation ada file/gak
     const formData = new FormData();
     formData.append('picture', `${req.file.originalname}`);
-    formData.append('picture', 'picture', `${req.file.originalname}`, req.file.buffer);
+    formData.append('picture', req.file.buffer, `${req.file.originalname}`);
     const newHeader = Object.assign(axios.defaults.headers.common, formData.getHeaders());
     const postUrl = apiServer + '/designers/' + req.params.id + '/picture'
-    console.log(formData);
 
-
-    let pageVariables = Object.assign(defaultSiteValues, { user: req.user, upPageLevel: '../../' });
+    let pageVariables = Object.assign(defaultSiteValues, { user: req.user, upPageLevel: '../../', });
     const result = await axios.post(postUrl, formData, { headers: newHeader });
 
-    //ATURRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRW
-
-    res.send('ok')
-    // res.render('./xxxx/xxxx', pageVariables);
+    res.redirect(req.get('referer'));
   }
   catch (err) {
 
-    if (!err.response.status) return res.send(err.response.data);
+    if (!err.response) return res.send(err.stack);
+    res.status(err.response.status).send('error: ' + err.response.data)
+  };
+});
+
+router.post('/designers/:id', auth, async (req, res) => {
+  try {
+    let pageVariables = Object.assign(defaultSiteValues, { user: req.user });
+    const payload = Object.assign(req.body, {
+
+    })
+    const result = await axios.post(apiServer + '/designers/');
+
+
+    res.redirect(req.get('referer'));
+    // res.render('./xxxx/xxxx', pageVariables);
+  } catch (err) {
     res.status(err.response.status).send('error: ' + err.response.data)
   };
 });
@@ -201,6 +213,8 @@ router.get('/designers/:id/orders/:orderId', auth, async (req, res) => {
     res.status(err.response.status).send('error: ' + err.response.data)
   };
 });
+
+
 
 //FOR TESTING PURPOSE
 router.get('/template', async (req, res) => {

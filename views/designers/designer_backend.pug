@@ -3,6 +3,9 @@ head
   include ../includes/head.pug
   include ../includes/loginmodal.pug
   include ../includes/script.pug
+  script(defer src=upPageLevel+"public/js/backend/admin_script.js")
+  script.
+    const postActionUrl = `#{postAction}`
   title Document
 body
   include ../includes/header.pug
@@ -17,14 +20,15 @@ body
             th Pengaturan
         tbody
           tr
-            td Nama
-            td #{designer.businessName}
+            td#infoNama Nama
+            td#descNama #{designer.businessName}
             td 
-              a.btn(href="#" class= `${colorTheme}`) ubah
+              button.btn(href="#" class= `${colorTheme}` onclick="editNama();") ubah
+                i.material-icons.right edit
           tr
             td Gambar
             td #{designer.picture}
-            td 
+            td
               form(action="/designers/"+designer._id+"/picture" method="post" enctype="multipart/form-data")
 
                 //- input(type='file' name='myimage')
@@ -32,8 +36,9 @@ body
 
 
                 .file-field.input-field
-                  .btn
-                    span File
+                  .btn(class= `${colorTheme}`)
+                    span file
+                      i.material-icons.right add_a_photo
                     input(type='file' name='picture' accept='image/*' class= `${colorTheme}`)
                   .file-path-wrapper
                     input.file-path.validate(type='text')
@@ -47,6 +52,7 @@ body
             td #{designer.account.maintainers}
             td 
               a.btn(href="#" class= `${colorTheme}`) ubah
+                i.material-icons.right edit
           tr
             td Keahlian
             td 
@@ -54,11 +60,13 @@ body
                 span "#{val.name}" 
             td 
               a.btn(href="#" class= `${colorTheme}`) ubah
+                i.material-icons.right edit
           tr
             td Transaksi
             td #{designer.works}
             td 
               a.btn(href="#" class= `${colorTheme}`) Lihat
+                i.material-icons.right visibility
 
       br
       .center

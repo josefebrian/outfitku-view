@@ -9,6 +9,11 @@ body {
 main {
   flex: 1 0 auto;
 } */
+.parallax-container {
+  background: linear-gradient( rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.17) )
+}
+
+
 
 .datepicker-date-display { background-color: #263238; }
 .datepicker-day.picker__day--today { color: 78909c; }
