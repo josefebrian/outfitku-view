@@ -4,6 +4,7 @@ head
   include ../includes/loginmodal.pug
   include ../includes/script.pug
   title #{siteName} - Form Order
+  script(defer src=upPageLevel+'public/js/order_script.js')
 body
   include ../includes/header.pug
   main
@@ -11,15 +12,15 @@ body
       .container
         .row
           p from: #{message.from.name} date: #{message.message.date}
-    
-    
+          p #{message.message.content}   
     .container
       .row
-        ul#messages
-        form(action='')
-          input#m(autocomplete='off')
-          button Send
-
-
+        ul
+        form(action='/designers/'+designer._id+'/orders/'+order._id+'/messages', method="POST")
+          input(id='box' type='text' name="content" autocomplete='off')
+          a(href='/designers/'+designer._id+'/orders/'+order._id)
+            button.btn.waves-effect.waves-light(type='submit' class= `${colorTheme}`)
+              | Kirim
+              i.material-icons.right send
 
   include ../includes/footer.pug
