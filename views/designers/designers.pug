@@ -29,9 +29,9 @@ body
         .row#designerList
           each designer in designers
             .col.s6.m3
-              .card(class= `${colorTheme}`)
-                .card-image
-                  img(src=''+imgCDN+designer.picture onerror="this.onerror=null;this.src='/public/img/site/no-image.png';")
+              .card.small.hoverable(class= `${colorTheme}`)
+                .card-image.center
+                  img(src=link.imgCDN+'designers/'+designer._id+'/main/'+designer.picture onerror="this.onerror=null;this.src='/public/img/site/no-image.png';")
                 .card-action
                   a(href='/designers/'+designer._id) #{designer.businessName}
         
