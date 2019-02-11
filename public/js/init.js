@@ -17,8 +17,10 @@ function materializeInit() {
     defaultDate: new Date(new Date().getFullYear() - 25, new Date().getMonth(), new Date().getDate()),
     yearRange: [new Date().getFullYear() - 69, new Date().getFullYear() - 14]
   })
+  M.Materialbox.init(document.querySelectorAll('.materialboxed'));
+  M.ScrollSpy.init(document.querySelectorAll('.scrollspy'));
 }
 
-document.addEventListener('DOMContentLoaded', async function () {
+document.addEventListener('DOMContentLoaded', async function() {
   await materializeInit();
 });

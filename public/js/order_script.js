@@ -1,1 +1,1 @@
-document.getElementById('box').scrollIntoView();
+document.getElementById('box').lastElementChild.scrollIntoView();

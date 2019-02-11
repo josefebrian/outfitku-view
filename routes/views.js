@@ -7,7 +7,7 @@ const authPass = require('../middleware/authPass');
 const apiServer = config.get('APIServer');
 const _ = require('lodash');
 const multer = require('multer')
-const FormData = require('form-data');//https://github.com/axios/axios/issues/1006#issuecomment-320165427
+const FormData = require('form-data'); //https://github.com/axios/axios/issues/1006#issuecomment-320165427
 
 
 let defaultSiteValues = {
@@ -21,7 +21,8 @@ let defaultSiteValues = {
     imgCDN: config.get('imgCDN'),
     imgCDNCategories: config.get('imgCDN') + 'categories/',
     designer: '/designers',
-    order: '/order',
+    order: '/orders',
+    messages: '/messages',
     about: '/about',
     register: 'register',
     apiServer: config.get('APIServer')
@@ -173,8 +174,7 @@ router.post('/designers/:id/picture', [auth, upload.single('picture')], async (r
     const result = await axios.post(postUrl, formData, { headers: newHeader });
 
     res.redirect(req.get('referer'));
-  }
-  catch (err) {
+  } catch (err) {
 
     if (!err.response) return res.send(err.stack);
     res.status(err.response.status).send('error: ' + err.response.data)
@@ -238,19 +238,25 @@ router.post('/designers/:id/orders/:orderId/messages', auth, async (req, res) =>
   };
 });
 
-router.post('/designers/:id/orders/:orderId/messages/image', auth, async (req, res) => {
+router.post('/designers/:id/orders/:orderId/messages/image', [auth, upload.single('content')], async (req, res) => {
   try {
     const designer = await axios.get(apiServer + '/designers/' + req.params.id);
     const order = await axios.get(apiServer + '/orders/' + req.params.orderId);
-    const message = await axios.post(apiServer + '/messages/' + req.params.orderId + '/image', { messageType: 'image', content: req.file.originalname })
 
-    let pageVariables = Object.assign(defaultSiteValues, { user: req.user, message: message.data, order: order.data, designer: designer.data, upPageLevel: '../../../../../' });
+    const formData = new FormData();
+    formData.append('content', `${req.file.originalname}`);
+    formData.append('messageType', `image`)
+    formData.append('content', req.file.buffer, `${req.file.originalname}`);
+    console.log(formData);
+    const newHeader = Object.assign(axios.defaults.headers.common, formData.getHeaders());
+    const postUrl = apiServer + '/messages/' + req.params.orderId + '/image'
+    const result = await axios.post(postUrl, formData, { headers: newHeader, messageType: 'image' });
 
-    console.log(req.file);
+    let pageVariables = Object.assign(defaultSiteValues, { user: req.user, message: result.data, order: order.data, designer: designer.data, upPageLevel: '../../../../../' });
 
     res.redirect(req.get('referer'));
-    // res.send(templateItem.data)
   } catch (err) {
+    if (!err.response) return res.send(err.stack);
     res.status(err.response.status).send('error: ' + err.response.data)
   };
 });
