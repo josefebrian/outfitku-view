@@ -164,10 +164,9 @@ router.post('/designers/:id/picture', [auth, upload.single('picture')], async (r
   try {
     const formData = new FormData();
     formData.append('picture', `${req.file.originalname}`);
-    formData.append('picture', 'picture', `${req.file.originalname}`, req.file.buffer);
+    formData.append('picture', req.file.buffer, `${req.file.originalname}`);
     const newHeader = Object.assign(axios.defaults.headers.common, formData.getHeaders());
     const postUrl = apiServer + '/designers/' + req.params.id + '/picture'
-    console.log(formData);
 
 
     let pageVariables = Object.assign(defaultSiteValues, { user: req.user, upPageLevel: '../../' });
@@ -176,7 +175,6 @@ router.post('/designers/:id/picture', [auth, upload.single('picture')], async (r
     //ATURRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRW
 
     res.send('ok')
-    // res.render('./xxxx/xxxx', pageVariables);
   } catch (err) {
 
     if (!err.response.status) return res.send(err.response.data);
@@ -206,6 +204,37 @@ router.get('/designers/:id/orders/:orderId', auth, async (req, res) => {
 
     // res.send(templateItem.data)
     res.render('./designers/viewOrder', pageVariables);
+  } catch (err) {
+    res.status(err.response.status).send('error: ' + err.response.data)
+  };
+});
+
+router.post('/designers/:id/orders/:orderId/messages', auth, async (req, res) => {
+  try {
+    const designer = await axios.get(apiServer + '/designers/' + req.params.id);
+    const order = await axios.get(apiServer + '/orders/' + req.params.orderId);
+    const message = await axios.post(apiServer + '/messages/' + req.params.orderId, { messageType: 'text', content: req.body.content })
+    let pageVariables = Object.assign(defaultSiteValues, { user: req.user, message: message.data, order: order.data, designer: designer.data, upPageLevel: '../../../../' });
+
+    res.redirect(req.get('referer'));
+    // res.send(templateItem.data)
+  } catch (err) {
+    res.status(err.response.status).send('error: ' + err.response.data)
+  };
+});
+
+router.post('/designers/:id/orders/:orderId/messages/image', auth, async (req, res) => {
+  try {
+    const designer = await axios.get(apiServer + '/designers/' + req.params.id);
+    const order = await axios.get(apiServer + '/orders/' + req.params.orderId);
+    const message = await axios.post(apiServer + '/messages/' + req.params.orderId + '/image', { messageType: 'image', content: req.file.originalname })
+
+    let pageVariables = Object.assign(defaultSiteValues, { user: req.user, message: message.data, order: order.data, designer: designer.data, upPageLevel: '../../../../../' });
+
+    console.log(req.file);
+
+    res.redirect(req.get('referer'));
+    // res.send(templateItem.data)
   } catch (err) {
     res.status(err.response.status).send('error: ' + err.response.data)
   };
