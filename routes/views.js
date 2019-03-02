@@ -262,8 +262,6 @@ router.post('/designers/:id/orders/:orderId/messages/image', [auth, upload.singl
   };
 });
 
-
-
 //FOR TESTING PURPOSE
 router.get('/template', async (req, res) => {
   const pageVariables = Object.assign(defaultSiteValues, {});

@@ -40,31 +40,40 @@ body
       .col(class='s2 m2 l2')
         p test
     .row
-      //- form(action='/designers/'+designer._id+'/orders/'+order._id+'/messages/image', method="POST" enctype="multipart/form-data")
+      //- form(action='/designers/'+designer._id+'/orders/'+order._id+'/messages/image' method="POST" enctype="multipart/form-data")
       //-   .file-field.input-field
       //-     .btn(class= `${colorTheme}`)
       //-       span file
       //-         i.material-icons.right add_a_photo
       //-       input(type='file' name='content' accept='image/*' class= `${colorTheme}` onchange='this.form.submit()')
-      form(action='/designers/'+designer._id+'/orders/'+order._id+'/messages', method="POST") 
-        .row
-          .col(class='s1 m1 l1')
-            a.dropdown-trigger.btn(href='#', data-target='dropdown1') m
+      //-     .file-path-wrapper
+      //-       input.file-path.validate(type='text')
+      form(action='/designers/'+designer._id+'/orders/'+order._id+'/messages', method="POST")
+        .container
+          .col(class='s1 m1 l3')
+            a.dropdown-trigger.btn(style='margin-left: 118px;' href='#', data-target='dropdown1')
+              span file
+                i.material-icons.right attachment
             ul#dropdown1.dropdown-content
               li
-                a(href='#!') c
+                form(action='/designers/'+designer._id+'/orders/'+order._id+'/messages/image' method="POST" enctype="multipart/form-data")
+                  .file-field.input-field
+                    .btn(class= `${colorTheme}`)
+                      i.material-icons.right add_a_photo
+                      input(type='file' name='content' accept='image/*' class= `${colorTheme}` onchange='this.form.submit()')
+                    .file-path-wrapper
+                      input.file-path.validate(type='text')
               li
                 a(href='#!') b
               li.divider(tabindex='-1')
               li
                 a(href='#!') a
-
-          .col(class='s1 m1 l1')
+          .col(class='s1 m1 l7')
             input(type='text' name="content" autocomplete='off')
-          .col(class='s1 m1 l1')
+          .col(class='s1 m1 l2')
             a(href='/designers/'+designer._id+'/orders/'+order._id)
-              button.btn.waves-effect.waves-light(type='submit' class= `${colorTheme}`)
-                | Kirim
-                i.material-icons.right send
+            button.btn.waves-effect.waves-light(type='submit' class= `${colorTheme}`)
+              | Kirim
+              i.material-icons.right send
 
   include ../includes/footer.pug
