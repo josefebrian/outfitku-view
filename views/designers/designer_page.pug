@@ -20,22 +20,35 @@ body
               //- //- span(style="text-shadow: 0px 6px 10px #0000002e;")=judul
           .row.center
             h1.white-text.text-lighten-2(style="text-shadow: 0px 3px 1px #0000002e;") #{designer.businessName.toUpperCase()}
-            h5.header.col.s12.light.white-text.text-lighten-2(style="text-shadow: 0px 3px 1px #0000002e;") #{designer.businessAddress.toUpperCase()}
+            h5.header.col.s12.light.white-text.text-lighten-2
+              each item in designer.expertise
+                p.chip.z-depth-2 #{item.name}
           .row.center
             a.waves-effect.waves-light.btn.modal-trigger(href='#modal_order' class= `${colorTheme}` ) Mulai Design
         .parallax
           img.responsive-img(src=link.imgCDN+'designers/'+designer._id+'/main/'+designer.picture alt='Background Image' onerror="this.onerror=null;this.src='/public/img/site/default-pic-designer.jpg';")
     .container.center
       .section
-        .row
-            .col.s12
-              h4='Tentang '+ designer.businessName
-              p alamat: #{designer.businessAddress}
-              p email: #{designer.businessEmail}
-              p keahlian: 
-                each skill in designer.expertise
-                  span #{skill.name} 
-              p #{designer.xxxxx}
+          h4.center='Tentang '+ designer.businessName
+          br
+          .row
+            .col.s4.center
+              i.medium.material-icons store_mall_directory
+              p #{designer.businessAddress}
+            .col.s4.center 
+              i.medium.material-icons label
+              br
+              br
+              each item in designer.expertise
+                .chip #{item.name}
+            .col.s4.center
+              i.medium.material-icons email
+              p #{designer.businessEmail}
+            .carousel
+              each item in designer.expertise
+                .carousel-item
+                  p #{item.name}
+                  img(src=`${link.imgCDN}categories/${item.name}.jpg`, alt="").z-depth-4
       .section
         .row
             .col.s12

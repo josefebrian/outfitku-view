@@ -75,6 +75,7 @@ router.get('/designers', authPass, auth, async (req, res) => {
     // res.send(designers.data)
     res.render('./designers/designers', pageVariables);
   } catch (err) {
+    if (!err.response) res.send(err.message)
     res.status(err.response.status).send('error: ' + err.response.data)
   };
 });
@@ -137,8 +138,8 @@ router.post('/profile/create_business', auth, async (req, res) => {
     const designer = await axios.post(apiServer + '/designers/', req.body);
 
 
-    res.send(req.body)
-    // res.render('./profile/create_business', pageVariables);
+    // res.send(req.body)
+    res.redirect(`/${designer._id}`);
   } catch (err) {
     res.status(err.response.status).send('error: ' + err.response.data)
   };

@@ -1,6 +1,6 @@
 {
     "APIServer": "http://192.168.0.4:3000/api",
-    "getImg": "/public/img/",
-    "saveImg": "./public/img/",
-    "imgCDN": "http://192.168.0.4:3000/public/img/"
+    "imgCDN": "http://192.168.0.4:3000/public/img/",
+    // "APIServer": "http://localhost:3000/api",
+    // "imgCDN": "http://localhost:3000/public/img/"
 }

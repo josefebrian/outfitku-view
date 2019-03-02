@@ -1,12 +1,12 @@
 html(lang="en")
-head
+head 
   include ../includes/head.pug
   include ../includes/loginmodal.pug
   include ../includes/script.pug
   script(defer src=upPageLevel+"public/js/backend/admin_script.js")
   script.
     const postActionUrl = `#{postAction}`
-  title Document
+  title #{siteName} - #{designer.businessName} Admin
 body
   include ../includes/header.pug
   main
