@@ -19,6 +19,14 @@ main {
   overflow: auto;
 }
 
+.textRight{
+  border-radius:10px;
+}
+
+.textLeft{
+  border-radius:10px;
+}
+
 .datepicker-date-display { background-color: #263238; }
 .datepicker-day.picker__day--today { color: 78909c; }
 .datepicker-day--selected, .picker__day--selected:hover,

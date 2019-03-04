@@ -1,0 +1,72 @@
+html(lang="en")
+head
+  include ../includes/head.pug
+  include ../includes/loginmodal.pug
+  include ../includes/script.pug
+  title #{siteName} - Form Order
+  script(defer src=upPageLevel+'public/js/order_script.js')
+body
+  include ../includes/header.pug
+  main
+    .row
+      .col(class='s3 m3 l3')
+        p test
+      .col(class='s7 m7 l7 scrollable')#box
+          each message in order.chatLog
+            - let type = message.message.messageType
+            - let isUser = message.from._id == order.user._id
+                if type == 'text'
+                  if isUser
+                      .card-panel.teal
+                        p from: #{message.from.name}
+                        p #{message.message.content}
+                        p #{message.message.date}   
+                  else
+                    .card-panel.blue
+                      p from: #{message.from.name}
+                      p #{message.message.content}
+                      p #{message.message.date}   
+                else
+                  if isUser
+                    .card-panel.teal
+                      p from: #{message.from.name}
+                      img.materialboxed(width='50%', src=link.imgCDN+'orders/'+order._id+'/messages/'+message.message.content)
+                      p #{message.message.date}   
+                  else
+                    .card-panel.blue
+                      p from: #{message.from.name}
+                      img.materialboxed(width='50%', src=link.imgCDN+'orders/'+order._id+'/messages/'+message.message.content)
+                      p #{message.message.date}   
+      .col(class='s2 m2 l2')
+        p test
+    .row
+        //- form(action='/designers/'+designer._id+'/orders/'+order._id+'/messages/image', method="POST" enctype="multipart/form-data")
+        //-   .file-field.input-field
+        //-     .btn(class= `${colorTheme}`)
+        //-       span file
+        //-         i.material-icons.right add_a_photo
+        //-       input(type='file' name='content' accept='image/*' class= `${colorTheme}` onchange='this.form.submit()')
+        form(action='/designers/'+designer._id+'/orders/'+order._id+'/messages', method="POST")
+          .container
+            .col(class='s1 m1 l3')
+              a.dropdown-trigger.btn(style='margin-left: 118px;' href='#', data-target='dropdown1')
+                span file
+                  i.material-icons.right attachment
+              ul#dropdown1.dropdown-content
+                li
+                  a(href='#!')
+                    i.material-icons.right add_a_photo
+                li
+                  a(href='#!') b
+                li.divider(tabindex='-1')
+                li
+                  a(href='#!') a
+            .col(class='s1 m1 l7')
+              input(type='text' name="content" autocomplete='off')
+            .col(class='s1 m1 l2')
+              a(href='/designers/'+designer._id+'/orders/'+order._id)
+                button.btn.waves-effect.waves-light(type='submit' class= `${colorTheme}`)
+                  | Kirim
+                  i.material-icons.right send
+
+  include ../includes/footer.pug

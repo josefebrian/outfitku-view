@@ -216,9 +216,35 @@ router.get('/designers/:id/orders/:orderId', auth, async (req, res) => {
   try {
     const designer = await axios.get(apiServer + '/designers/' + req.params.id);
     const order = await axios.get(apiServer + '/orders/' + req.params.orderId);
-    let pageVariables = Object.assign(defaultSiteValues, { user: req.user, order: order.data, designer: designer.data, upPageLevel: '../../../' });
+    const customer = order.data.user._id;
 
-    // res.send(templateItem.data)
+    let day = new Array(7);
+    day[0] = "Sunday";
+    day[1] = "Monday";
+    day[2] = "Tuesday";
+    day[3] = "Wednesday";
+    day[4] = "Thursday";
+    day[5] = "Friday";
+    day[6] = "Saturday";
+
+    let month = new Array();
+    month[0] = "January";
+    month[1] = "February";
+    month[2] = "March";
+    month[3] = "April";
+    month[4] = "May";
+    month[5] = "June";
+    month[6] = "July";
+    month[7] = "August";
+    month[8] = "September";
+    month[9] = "October";
+    month[10] = "November";
+    month[11] = "December";
+
+    let pageVariables = Object.assign(defaultSiteValues, { user: req.user, order: order.data, designer: designer.data, upPageLevel: '../../../', day: day, month: month });
+
+    if (req.user._id != designer.data.account.owner._id && req.user._id != customer) return res.status(403).send('unauthorized')
+
     res.render('./designers/viewOrder', pageVariables);
   } catch (err) {
     res.status(err.response.status).send('error: ' + err.response.data)
@@ -235,7 +261,8 @@ router.post('/designers/:id/orders/:orderId/messages', auth, async (req, res) =>
     res.redirect(req.get('referer'));
     // res.send(templateItem.data)
   } catch (err) {
-    res.status(err.response.status).send('error: ' + err.response.data)
+    // res.status(err.response.status).send('error: ' + err.response.data)
+    console.log(err);
   };
 });
 
@@ -261,8 +288,6 @@ router.post('/designers/:id/orders/:orderId/messages/image', [auth, upload.singl
     res.status(err.response.status).send('error: ' + err.response.data)
   };
 });
-
-
 
 //FOR TESTING PURPOSE
 router.get('/template', async (req, res) => {
