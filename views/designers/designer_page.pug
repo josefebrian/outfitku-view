@@ -1,58 +1,58 @@
 html(lang="en")
-head
-  include ../includes/head.pug
-  include ../includes/loginmodal.pug
-  include ../includes/script.pug
-  include ../includes/inputOrder.pug
+  head
+    include ../includes/head.pug
+    include ../includes/loginmodal.pug
+    include ../includes/script.pug
+    include ../includes/inputOrder.pug
 
-    title #{siteName} - #{designer.businessName}
-  body
-    include ../includes/header.pug
-    main
-      #index-banner.parallax-container
-        .section.no-pad-bot
-          .container
-            br
-            br
-            h1.header.center.white-text.text-lighten-2
-              p
-                //- i.medium.material-icons(style="text-shadow: 0px 6px 10px #0000002e;")=judul
-                //- //- span(style="text-shadow: 0px 6px 10px #0000002e;")=judul
-            .row.center
-              h1.white-text.text-lighten-2(style="text-shadow: 0px 3px 1px #0000002e;") #{designer.businessName.toUpperCase()}
-              h5.header.col.s12.light.white-text.text-lighten-2
-                each item in designer.expertise
-                  p.chip.z-depth-2 #{item.name}
-            .row.center
-              a.waves-effect.waves-light.btn.modal-trigger(href='#modal_order' class= `${colorTheme}` ) Mulai Design
-          .parallax
-            img.responsive-img(src=link.imgCDN+'designers/'+designer._id+'/main/'+designer.picture alt='Background Image' onerror="this.onerror=null;this.src='/public/img/site/default-pic-designer.jpg';")
-      .container.center
-        .section
-            h4.center='Tentang '+ designer.businessName
-            br
+      title #{siteName} - #{designer.businessName}
+    body
+      include ../includes/header.pug
+      main
+        #index-banner.parallax-container
+          .section.no-pad-bot
+            .container
+              br
+              br
+              h1.header.center.white-text.text-lighten-2
+                p
+                  //- i.medium.material-icons(style="text-shadow: 0px 6px 10px #0000002e;")=judul
+                  //- //- span(style="text-shadow: 0px 6px 10px #0000002e;")=judul
+              .row.center
+                h1.white-text.text-lighten-2(style="text-shadow: 0px 3px 1px #0000002e;") #{designer.businessName.toUpperCase()}
+                h5.header.col.s12.light.white-text.text-lighten-2
+                  each item in designer.expertise
+                    p.chip.z-depth-2 #{item.name}
+              .row.center
+                a.waves-effect.waves-light.btn.modal-trigger(href='#modal_order' class= `${colorTheme}` ) Mulai Design
+            .parallax
+              img.responsive-img(src=link.imgCDN+'designers/'+designer._id+'/main/'+designer.picture alt='Background Image' onerror="this.onerror=null;this.src='/public/img/site/default-pic-designer.jpg';")
+        .container.center
+          .section
+              h4.center='Tentang '+ designer.businessName
+              br
+              .row
+                .col.s4.center
+                  i.medium.material-icons store_mall_directory
+                  p #{designer.businessAddress}
+                .col.s4.center 
+                  i.medium.material-icons style
+                  br
+                  br
+                  each item in designer.expertise
+                    .chip #{item.name}
+                .col.s4.center
+                  i.medium.material-icons email
+                  p #{designer.businessEmail}
+                .carousel
+                  each item in designer.expertise
+                    .carousel-item
+                      p #{item.name}
+                      img(src=`${link.imgCDN}categories/${item.name}.jpg`, alt="").z-depth-4
+          .section
             .row
-              .col.s4.center
-                i.medium.material-icons store_mall_directory
-                p #{designer.businessAddress}
-              .col.s4.center 
-                i.medium.material-icons style
-                br
-                br
-                each item in designer.expertise
-                  .chip #{item.name}
-              .col.s4.center
-                i.medium.material-icons email
-                p #{designer.businessEmail}
-              .carousel
-                each item in designer.expertise
-                  .carousel-item
-                    p #{item.name}
-                    img(src=`${link.imgCDN}categories/${item.name}.jpg`, alt="").z-depth-4
-        .section
-          .row
-              .col.s12
-                h4='Portfolio dari '+ designer.businessName
+                .col.s12
+                  h4='Portfolio dari '+ designer.businessName
 
 
-      include ../includes/footer.pug
+        include ../includes/footer.pug
