@@ -1,76 +1,76 @@
 html(lang="en")
-head
-  include ../includes/head.pug
-  include ../includes/loginmodal.pug
-  include ../includes/script.pug
-  title #{siteName} - Home
-body
-  include ../includes/header.pug
-  main
-    #index-banner.parallax-container
-      .section.no-pad-bot
-        .container
-          br
-          br
-          h1.header.center.white-text.text-lighten-2
-            p
-              //- i.medium.material-icons(style="text-shadow: 0px 6px 10px #0000002e;")=judul
-              //- //- span(style="text-shadow: 0px 6px 10px #0000002e;")=judul
-          .row.center
-            h1.white-text.text-lighten-2(style="text-shadow: 0px 3px 1px #0000002e;") #{siteName.toUpperCase()}
-            h5.header.col.s12.light.white-text.text-lighten-2(style="text-shadow: 0px 3px 1px #0000002e;") "Mulai, Rangkai, Pakai"
-          .row.center
-            a#download-button.btn-large.waves-effect.waves-light.lighten-1(href=link.designer class= `${colorTheme}`) Mulai
+  head
+    include ../includes/head.pug
+    include ../includes/loginmodal.pug
+    include ../includes/script.pug
+    title #{siteName} - Home
+  body
+    include ../includes/header.pug
+    main
+      #index-banner.parallax-container
+        .section.no-pad-bot
+          .container
+            br
+            br
+            h1.header.center.white-text.text-lighten-2
+              p
+                //- i.medium.material-icons(style="text-shadow: 0px 6px 10px #0000002e;")=judul
+                //- //- span(style="text-shadow: 0px 6px 10px #0000002e;")=judul
+            .row.center
+              h1.white-text.text-lighten-2(style="text-shadow: 0px 3px 1px #0000002e;") #{siteName.toUpperCase()}
+              h5.header.col.s12.light.white-text.text-lighten-2(style="text-shadow: 0px 3px 1px #0000002e;") "Mulai, Rangkai, Pakai"
+            .row.center
+              a#download-button.btn-large.waves-effect.waves-light.lighten-1(href=link.designer class= `${colorTheme}`) Mulai
+          .parallax
+            img.responsive-img(src=link.imgCDN+'site/bg-main-3.jpg' alt='Background Image')
+
+      // nanti buat card promo2...
+      .container.center
+            .section
+              .row#row
+                  .col.s12
+                    .col.s12.m6.l4
+                      .card.z-depth-2
+                        .card-image.waves-effect.waves-block.waves-light
+                          img#gambar.activator.responsive-img(src=link.imgCDN+'site/thumbs/designer-3.jpg', alt='nopic', onerror="this.onerror=null;this.src='/public/img/site/noshippic.png';", style='width:100%;height:14.8em;object-fit: cover;')
+                        .card-content
+                          span#nama.card-title.activator.text-darken-4(class='${htmlColor}-text') Desain Professional
+                        .card-reveal
+                          span#model.card-title.text-darken-4(class='${htmlColor}-text')
+                            | Kualitas
+                            i.material-icons.right close
+                          p#tipe.text-darken-4(class='${htmlColor}-text') Kami memperhatikan pengelolaan kualitas dengan serius. Ini berarti kami memberikan perhatian ketat untuk memastikan standar kualitas tertinggi pada lingkungan kami setiap waktu.
+
+                    .col.s12.s12.m6.l4
+                      .card.z-depth-2
+                        .card-image.waves-effect.waves-block.waves-light
+                          img#gambar.activator.responsive-img(src=link.imgCDN+'site/thumbs/designer-1.jpg', alt='nopic', onerror="this.onerror=null;this.src='/public/img/site/noshippic.png';", style='width:100%;height:14.8em;object-fit: cover;')
+                        .card-content
+                          span#nama.card-title.activator.text-darken-4(class='${htmlColor}-text') Ragam Pilihan
+                        .card-reveal
+                          span#model.card-title.text-darken-4(class='${htmlColor}-text')
+                            | Kebutuhan
+                            i.material-icons.right close
+                          p#tipe.text-darken-4(class='${htmlColor}-text') Sesuai dengan kebutuhan dan perkembangan bisnis, kami menyediakan berbagai jenis kapal hingga kebutuhan yang spesifik.
+
+                    .col.s12.s12.m6.l4
+                      .card.z-depth-2
+                        .card-image.waves-effect.waves-block.waves-light
+                          img#gambar.activator.responsive-img(src=link.imgCDN+'site/thumbs/designer-2.jpg', alt='nopic', onerror="this.onerror=null;this.src='/public/img/site/noshippic.png';", style='width:100%;height:14.8em;object-fit: cover;')
+                        .card-content
+                          span#nama.card-title.activator.text-darken-4(class='${htmlColor}-text') Hasil Akurat
+                        .card-reveal
+                          span#model.card-title.text-darken-4(class='${htmlColor}-text')
+                            | Navigasi
+                            i.material-icons.right close
+                          p#tipe.text-darken-4(class='${htmlColor}-text') Mengintegrasikan perangkat navigasi kokpit ke desain all-in-one, yang menjadi sangat handal. Menjamin pelayaran dengan rasa aman dan kestabilan.
+            
+        
+      .parallax-container.valign-wrapper 
+        .section.no-pad-bot
+          .container
+            .row.center
+              h5.header.col.s12.light.white-text(style="text-shadow: 0px 3px 1px #0000002e;") Tuangkan idemu ke dunia nyata melalui desainer pilihanmu.
         .parallax
-          img.responsive-img(src=link.imgCDN+'site/bg-main-3.jpg' alt='Background Image')
-
-    // nanti buat card promo2...
-    .container.center
-          .section
-            .row#row
-                .col.s12
-                  .col.s12.m6.l4
-                    .card.z-depth-2
-                      .card-image.waves-effect.waves-block.waves-light
-                        img#gambar.activator.responsive-img(src=link.imgCDN+'site/thumbs/designer-3.jpg', alt='nopic', onerror="this.onerror=null;this.src='/public/img/site/noshippic.png';", style='width:100%;height:14.8em;object-fit: cover;')
-                      .card-content
-                        span#nama.card-title.activator.text-darken-4(class='${htmlColor}-text') Desain Professional
-                      .card-reveal
-                        span#model.card-title.text-darken-4(class='${htmlColor}-text')
-                          | Kualitas
-                          i.material-icons.right close
-                        p#tipe.text-darken-4(class='${htmlColor}-text') Kami memperhatikan pengelolaan kualitas dengan serius. Ini berarti kami memberikan perhatian ketat untuk memastikan standar kualitas tertinggi pada lingkungan kami setiap waktu.
-
-                  .col.s12.s12.m6.l4
-                    .card.z-depth-2
-                      .card-image.waves-effect.waves-block.waves-light
-                        img#gambar.activator.responsive-img(src=link.imgCDN+'site/thumbs/designer-1.jpg', alt='nopic', onerror="this.onerror=null;this.src='/public/img/site/noshippic.png';", style='width:100%;height:14.8em;object-fit: cover;')
-                      .card-content
-                        span#nama.card-title.activator.text-darken-4(class='${htmlColor}-text') Ragam Pilihan
-                      .card-reveal
-                        span#model.card-title.text-darken-4(class='${htmlColor}-text')
-                          | Kebutuhan
-                          i.material-icons.right close
-                        p#tipe.text-darken-4(class='${htmlColor}-text') Sesuai dengan kebutuhan dan perkembangan bisnis, kami menyediakan berbagai jenis kapal hingga kebutuhan yang spesifik.
-
-                  .col.s12.s12.m6.l4
-                    .card.z-depth-2
-                      .card-image.waves-effect.waves-block.waves-light
-                        img#gambar.activator.responsive-img(src=link.imgCDN+'site/thumbs/designer-2.jpg', alt='nopic', onerror="this.onerror=null;this.src='/public/img/site/noshippic.png';", style='width:100%;height:14.8em;object-fit: cover;')
-                      .card-content
-                        span#nama.card-title.activator.text-darken-4(class='${htmlColor}-text') Hasil Akurat
-                      .card-reveal
-                        span#model.card-title.text-darken-4(class='${htmlColor}-text')
-                          | Navigasi
-                          i.material-icons.right close
-                        p#tipe.text-darken-4(class='${htmlColor}-text') Mengintegrasikan perangkat navigasi kokpit ke desain all-in-one, yang menjadi sangat handal. Menjamin pelayaran dengan rasa aman dan kestabilan.
-          
-      
-    .parallax-container.valign-wrapper 
-      .section.no-pad-bot
-        .container
-          .row.center
-            h5.header.col.s12.light.white-text(style="text-shadow: 0px 3px 1px #0000002e;") Tuangkan idemu ke dunia nyata melalui desainer pilihanmu.
-      .parallax
-        img.responsive-img(src=link.imgCDN+'site/bg-main-4.jpg' alt='Background Image 2')
-    include ../includes/footer.pug
+          img.responsive-img(src=link.imgCDN+'site/bg-main-4.jpg' alt='Background Image 2')
+      include ../includes/footer.pug

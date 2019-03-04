@@ -1,63 +1,63 @@
 html(lang="en")
-head
-  include ../includes/head.pug
-  include ../includes/loginmodal.pug
-  include ../includes/script.pug
-  title #{siteName} - Akun Saya
-body
-  include ../includes/header.pug
-  main
+  head
+    include ../includes/head.pug
+    include ../includes/loginmodal.pug
+    include ../includes/script.pug
+    title #{siteName} - Akun Saya
+  body
+    include ../includes/header.pug
+    main
 
-    h4.center Akun Saya
-    br
-    ul.collection.container.z-depth-1
-      li.collection-item
-        p(style="float:left;width: 10%;min-width: 50px; margin-right: 1em")  Nama 
-        p=name
-      li.collection-item
-        p(style="float:left;width: 10%;min-width: 50px; margin-right: 1em")  Telepon 
-        p=phone
-      li.collection-item
-        p(style="float:left;width: 10%;min-width: 50px; margin-right: 1em")  E-Mail 
-        p=email
-      li.collection-item
-        p(style="float:left;width: 10%;min-width: 50px; margin-right: 1em")  Alamat 
-        p=address
-      
-    .section
-    div#pesanan
-
-
-    br
-
-    .center
-      if hasBusiness
-        h4 #{business.businessName}
-        .container
-          .card-panel
-            a.waves-effect.waves-light.btn(href="/designers/"+business._id class= `${colorTheme}`)
-              span Lihat halaman 
-                i.material-icons.right visibility
-            span 
-            a.waves-effect.waves-light.btn(href="/designers/"+business._id+'/admin' class= `${colorTheme}`)
-              
-              span kelola
-                i.material-icons.right edit
-      else 
-        .container
-          .card-panel
-            h4 Akun Desainer
-            a.waves-effect.waves-light.btn( class= `${colorTheme}` href="/profile/create_business" ) buat akun
-              i.material-icons.right add_circle
-    br    
-
-    div#transactions
-
-    br
-    .center
-      button.waves-effect.waves-light.btn( class= `${colorTheme}`)
-        a(href="/logout" ) logout
-    br
+      h4.center Akun Saya
+      br
+      ul.collection.container.z-depth-1
+        li.collection-item
+          p(style="float:left;width: 10%;min-width: 50px; margin-right: 1em")  Nama 
+          p=name
+        li.collection-item
+          p(style="float:left;width: 10%;min-width: 50px; margin-right: 1em")  Telepon 
+          p=phone
+        li.collection-item
+          p(style="float:left;width: 10%;min-width: 50px; margin-right: 1em")  E-Mail 
+          p=email
+        li.collection-item
+          p(style="float:left;width: 10%;min-width: 50px; margin-right: 1em")  Alamat 
+          p=address
+        
+      .section
+      div#pesanan
 
 
-    include ../includes/footer.pug
+      br
+
+      .center
+        if hasBusiness
+          h4 #{business.businessName}
+          .container
+            .card-panel
+              a.waves-effect.waves-light.btn(href="/designers/"+business._id class= `${colorTheme}`)
+                span Lihat halaman 
+                  i.material-icons.right visibility
+              span 
+              a.waves-effect.waves-light.btn(href="/designers/"+business._id+'/admin' class= `${colorTheme}`)
+                
+                span kelola
+                  i.material-icons.right edit
+        else 
+          .container
+            .card-panel
+              h4 Akun Desainer
+              a.waves-effect.waves-light.btn( class= `${colorTheme}` href="/profile/create_business" ) buat akun
+                i.material-icons.right add_circle
+      br    
+
+      div#transactions
+
+      br
+      .center
+        button.waves-effect.waves-light.btn( class= `${colorTheme}`)
+          a(href="/logout" ) logout
+      br
+
+
+      include ../includes/footer.pug

@@ -1,46 +1,46 @@
 html(lang="en")
-head
-  include ../includes/head.pug
-  include ../includes/loginmodal.pug
-  include ../includes/script.pug
-  title #{siteName} - Buat Akun Desainer
-body
-  include ../includes/header.pug
-  main
+  head
+    include ../includes/head.pug
+    include ../includes/loginmodal.pug
+    include ../includes/script.pug
+    title #{siteName} - Buat Akun Desainer
+  body
+    include ../includes/header.pug
+    main
 
-    h4.center Buat Bisnis
-    .container
-      .row
-        form(action="/profile/create_business" method="post").col.s12
-          .row
-            .input-field.col.s12
-              input#businessName.validate(name="businessName" type='text')
-              label(for='businessName') Nama Desainer
-              span.helper-text Nama jasa desain atau nama usaha anda
-          .row
-            .input-field.col.s12              
-              input#businessAddress.validate(name="businessAddress" type='text')
-              label(for='businessAddress') Alamat Bisnis
-              span.helper-text alamat workshop,kantor atau toko anda
-          .row
-            .input-field.col.s12
-              input#businessEmail.validate(name="businessEmail" type='email')
-              label(for='businessEmail') email/profile/create_business
-              span.helper-text alamat email untuk bisnis
-          .row
-            .input-field.col.s12
-              select(multiple name="expertise").icons#expertise
-                each category, index in categories
-                  option.left(value=category._id data-icon=link.imgCDN+'categories/'+category.mainImage) #{category.name}
+      h4.center Buat Bisnis
+      .container
+        .row
+          form(action="/profile/create_business" method="post").col.s12
+            .row
+              .input-field.col.s12
+                input#businessName.validate(name="businessName" type='text')
+                label(for='businessName') Nama Desainer
+                span.helper-text Nama jasa desain atau nama usaha anda
+            .row
+              .input-field.col.s12              
+                input#businessAddress.validate(name="businessAddress" type='text')
+                label(for='businessAddress') Alamat Bisnis
+                span.helper-text alamat workshop,kantor atau toko anda
+            .row
+              .input-field.col.s12
+                input#businessEmail.validate(name="businessEmail" type='email')
+                label(for='businessEmail') email/profile/create_business
+                span.helper-text alamat email untuk bisnis
+            .row
+              .input-field.col.s12
+                select(multiple name="expertise").icons#expertise
+                  each category, index in categories
+                    option.left(value=category._id data-icon=link.imgCDN+'categories/'+category.mainImage) #{category.name}
 
-              label Keahlian
-              span.helper-text pilih minimal 2 keahlian
-          .row.right
-            button.btn.waves-effect.waves-light(type='submit' class= `${colorTheme}`)
-              | Buat
-              i.material-icons.right send
-
-
+                label Keahlian
+                span.helper-text pilih minimal 2 keahlian
+            .row.right
+              button.btn.waves-effect.waves-light(type='submit' class= `${colorTheme}`)
+                | Buat
+                i.material-icons.right send
 
 
-  include ../includes/footer.pug
+
+
+    include ../includes/footer.pug

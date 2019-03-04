@@ -1,39 +1,39 @@
 html(lang="en")
-head
-  include ../includes/head.pug
-  include ../includes/loginmodal.pug
-  include ../includes/script.pug
-  title #{siteName} - Desainer
-body
-  include ../includes/header.pug
-  main
-    .div
-      .container.center
-        .carousel.carousel-slider.center
-          .carousel-fixed-item.center
-            a.btn.waves-effect.white.grey-text.darken-text-2 button
-          .carousel-item.red.white-text(href='#one!')
-            h2 First Panel
-            p.white-text This is your first panel
-          .carousel-item.amber.white-text(href='#two!')
-            h2 Second Panel
-            p.white-text This is your second panel
-          .carousel-item.green.white-text(href='#three!')
-            h2 Third Panel
-            p.white-text This is your third panel
-          .carousel-item.blue.white-text(href='#four!')
-            h2 Fourth Panel
-            p.white-text This is your fourth panel
-      .container.center.section
-        h3 List Desainer
-        .row#designerList
-          each designer in designers
-            .col.s6.m3
-              .card.small.hoverable(class= `${colorTheme}`)
-                .card-image.center
-                  img(src=link.imgCDN+'designers/'+designer._id+'/main/'+designer.picture onerror="this.onerror=null;this.src='/public/img/site/no-image.png';")
-                .card-action
-                  a(href='/designers/'+designer._id) #{designer.businessName}
-        
+  head
+    include ../includes/head.pug
+    include ../includes/loginmodal.pug
+    include ../includes/script.pug
+    title #{siteName} - Desainer
+  body
+    include ../includes/header.pug
+    main
+      .div
+        .container.center
+          .carousel.carousel-slider.center
+            .carousel-fixed-item.center
+              a.btn.waves-effect.white.grey-text.darken-text-2 button
+            .carousel-item.red.white-text(href='#one!')
+              h2 First Panel
+              p.white-text This is your first panel
+            .carousel-item.amber.white-text(href='#two!')
+              h2 Second Panel
+              p.white-text This is your second panel
+            .carousel-item.green.white-text(href='#three!')
+              h2 Third Panel
+              p.white-text This is your third panel
+            .carousel-item.blue.white-text(href='#four!')
+              h2 Fourth Panel
+              p.white-text This is your fourth panel
+        .container.center.section
+          h3 List Desainer
+          .row#designerList
+            each designer in designers
+              .col.s6.m3
+                .card.small.hoverable(class= `${colorTheme}`)
+                  .card-image.center
+                    img(src=link.imgCDN+'designers/'+designer._id+'/main/'+designer.picture onerror="this.onerror=null;this.src='/public/img/site/no-image.png';")
+                  .card-action
+                    a(href='/designers/'+designer._id) #{designer.businessName}
+          
 
-    include ../includes/footer.pug
+      include ../includes/footer.pug

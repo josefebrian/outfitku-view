@@ -1,78 +1,73 @@
 html(lang="en")
-head 
-  include ../includes/head.pug
-  include ../includes/loginmodal.pug
-  include ../includes/script.pug
-  script(defer src=upPageLevel+"public/js/backend/admin_script.js")
-  script.
-    const postActionUrl = `#{postAction}`
-  title #{siteName} - #{designer.businessName} Admin
-body
-  include ../includes/header.pug
-  main
-    .container
-      h2.center Admin #{designer.businessName} 
-      table.highlight.striped
+  head 
+    include ../includes/head.pug
+    include ../includes/loginmodal.pug
+    include ../includes/script.pug
+    title #{siteName} - #{designer.businessName} Admin
+  body
+    include ../includes/header.pug
+    main
+      .container
+        h2.center Admin #{designer.businessName} 
+        table.highlight.striped
 
-        tbody
-          tr
-            th#infoNama Nama
-            td#descNama #{designer.businessName}
-            td 
-              button.btn(href="#" class= `${colorTheme}` onclick="editNama();") ubah
-                i.material-icons.right edit
-          tr
-            th Akun Pengelola
-            td #{designer.account.maintainers}
-            td 
-              a.btn(href="#" class= `${colorTheme}`) ubah
-                i.material-icons.right edit
-          tr
-            th Keahlian
-            td 
-              each val in designer.expertise
-                span.chip #{val.name}
-            td 
-              a.btn(href="#" class= `${colorTheme}`) ubah
-                i.material-icons.right edit
-          tr
-            th Transaksi
-            td #{designer.works}
-            td 
-              a.btn(href="#" class= `${colorTheme}`) Lihat
-                i.material-icons.right visibility
-          tr
-            th Gambar
-            form(action="/designers/"+designer._id+"/picture" method="post" enctype="multipart/form-data")
+          tbody
+            tr
+              th#infoNama Nama
+              td#descNama #{designer.businessName}
               td 
-                .row
-                  .col.s5
-                    p #{designer.picture}
-                  .col.s7
-                    .file-field.input-field
-                      .btn(class= `${colorTheme}`)
-                        span file
-                          i.material-icons.right add_a_photo
-                        input(type='file' name='picture' accept='image/*' class= `${colorTheme}`)
-                      .file-path-wrapper
-                        input.file-path.validate(type='text')   
-              td
-                .row
-                  button.btn.waves-effect.waves-light(type='submit' class= `${colorTheme}`)
-                    | Upload
-                    i.material-icons.right send
-            
-      
 
-    div#pesanan
+            tr
+              th Akun Pengelola
+              td #{designer.account.maintainers}
+              td 
 
-    div#transactions
+            tr
+              th Keahlian
+              td 
+                each val in designer.expertise
+                  span.chip #{val.name}
+              td 
 
-    br
-    .center
-      a.waves-effect.waves-light.btn( class= `${colorTheme}` href="/profile" ) Kembali
+            tr
+              th Transaksi
+              td #{designer.works}
+              td 
+                a.btn(href="#" class= `${colorTheme}`) Lihat
+                  i.material-icons.right visibility
+            tr
+              th Gambar
+              form(action="/designers/"+designer._id+"/picture" method="post" enctype="multipart/form-data")
+                td 
+                  .row
+                    .col.s5
+                      a(href=`${link.imgCDN}/designers/${designer._id}/main/${designer.picture}` target="_blank")
+                        img(src=`${link.imgCDN}/designers/${designer._id}/main/${designer.picture}`, alt="gambar" height="12%" ) 
+                    .col.s7
+                      .file-field.input-field
+                        .btn(class= `${colorTheme}`)
+                          span file
+                            i.material-icons.right add_a_photo
+                          input(type='file' name='picture' accept='image/*' class= `${colorTheme}`)
+                        .file-path-wrapper
+                          input.file-path.validate(type='text')   
+                td
+                  .row
+                    button.btn.waves-effect.waves-light(type='submit' class= `${colorTheme}`)
+                      | Upload
+                      i.material-icons.right send
+              
         
-    br
+
+      div#pesanan
+
+      div#transactions
+
+      br
+      .center
+        a.waves-effect.waves-light.btn( class= `${colorTheme}` href="/profile" ) Kembali
+          
+      br
 
 
-    include ../includes/footer.pug
+      include ../includes/footer.pug

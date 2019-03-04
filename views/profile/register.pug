@@ -1,60 +1,60 @@
 html(lang="en")
-head
-  include ../includes/head.pug
-  include ../includes/loginmodal.pug
-  include ../includes/script.pug
-  title #{siteName} - Daftar
-body
-  include ../includes/header.pug
-  main
+  head
+    include ../includes/head.pug
+    include ../includes/loginmodal.pug
+    include ../includes/script.pug
+    title #{siteName} - Daftar
+  body
+    include ../includes/header.pug
+    main
 
-    h4.center.shadow REGISTRASI
-    .container
-      form(action="#",method="POST", onsubmit=" postUser();return false;")
-        label(for='name')
-          b Nama
-        input(type='text' placeholder='Nama lengkap' name='name' id='inp_name' required)
+      h4.center.shadow REGISTRASI
+      .container
+        form(action="#",method="POST", onsubmit=" postUser();return false;")
+          label(for='name')
+            b Nama
+          input(type='text' placeholder='Nama lengkap' name='name' id='inp_name' required)
 
-        label(for='email')
-          b Email
-        input(type='email' placeholder='nama@domain.com' name='email' id='inp_email' required)
+          label(for='email')
+            b Email
+          input(type='email' placeholder='nama@domain.com' name='email' id='inp_email' required)
 
-        label(for='password')
-          b Password
-        input(type='password' placeholder='masukkan password' name='password' id='inp_password' required)
+          label(for='password')
+            b Password
+          input(type='password' placeholder='masukkan password' name='password' id='inp_password' required)
 
-        label(for='phone')
-          b Telpon
-        input(type='tel' placeholder='081234567890' name='phone' id='inp_phone' required)
+          label(for='phone')
+            b Telpon
+          input(type='tel' placeholder='081234567890' name='phone' id='inp_phone' required)
 
-        label(for='address')
-          b Alamat
-        input(type='text' placeholder='Masukkan alamat lengkap anda' name='address' id='inp_address' required)
-        label(for='birthDate')
-          b Tanggal Lahir
-        input.datepicker(type='text' placeholder='Tanggal Lahir' name='birthDate' )
+          label(for='address')
+            b Alamat
+          input(type='text' placeholder='Masukkan alamat lengkap anda' name='address' id='inp_address' required)
+          label(for='birthDate')
+            b Tanggal Lahir
+          input.datepicker(type='text' placeholder='Tanggal Lahir' name='birthDate' )
 
-        label(for='sex')
-          b Kelamin
+          label(for='sex')
+            b Kelamin
+            p
+              label
+                input.with-gap(value= 'm' name='sex' type='radio' checked)
+                span Pria
+            p
+              label
+                input.with-gap(value= 'f' name='sex' type='radio' )
+                span Wanita
+
+
+
+
+
+
           p
             label
-              input.with-gap(value= 'm' name='sex' type='radio' checked)
-              span Pria
-          p
-            label
-              input.with-gap(value= 'f' name='sex' type='radio' )
-              span Wanita
+              input(type="checkbox" required)
+              span Saya setuju dengan semua peraturan yang telah ditentukan.
+          div.center(style="margin:40px;")
+              button(type="submit" class=`btn waves-light waves-effect ${colorTheme}` id="btnSubmit") Submit
 
-
-
-
-
-
-        p
-          label
-            input(type="checkbox" required)
-            span Saya setuju dengan semua peraturan yang telah ditentukan.
-        div.center(style="margin:40px;")
-            button(type="submit" class=`btn waves-light waves-effect ${colorTheme}` id="btnSubmit") Submit
-
-    include ../includes/footer
+      include ../includes/footer

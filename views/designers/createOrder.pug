@@ -1,14 +1,14 @@
 html(lang="en")
-include ../includes/head.pug
-  include ../includes/script.pug
-  title Order
-body
-  main
-    .container.center
-      h3 Order sukses.
-      p Order dengan id 
-      b #{order._id}
-      p berhasil.
-      p Silahkan klik tombol dibawah untuk melanjutkan.
-      .btn(class= `${colorTheme}`)
-        a(href= "/designers/"+designer._id+"/orders/"+order._id ) ke ruang order
+  include ../includes/head.pug
+    include ../includes/script.pug
+    title Order
+  body
+    main
+      .container.center
+        h3 Order sukses.
+        p Order dengan id 
+        b #{order._id}
+        p berhasil.
+        p Silahkan klik tombol dibawah untuk melanjutkan.
+        .btn(class= `${colorTheme}`)
+          a(href= "/designers/"+designer._id+"/orders/"+order._id ) ke ruang order
