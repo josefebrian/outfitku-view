@@ -261,8 +261,7 @@ router.post('/designers/:id/orders/:orderId/messages', auth, async (req, res) =>
     res.redirect(req.get('referer'));
     // res.send(templateItem.data)
   } catch (err) {
-    // res.status(err.response.status).send('error: ' + err.response.data)
-    console.log(err);
+    res.status(err.response.status).send('error: ' + err.response.data)
   };
 });
 

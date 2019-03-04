@@ -1,10 +1,17 @@
 // Modal Structure
 #modal_order.modal
   .modal-content
-    h4.header.center.dark-text.text-lighten-2 Order
+    h4.header.center.dark-text.text-lighten-2 Form Init
     form(action="/designers/"+designer._id+"/order", method="post")
       .container
-        p Lanjutkan order dengan #{designer.businessName} ?
+        p Pilih kategori
+        .input-field.col.s12.m6
+          select.icons
+            option(value='', disabled='', selected='') Kategori
+            each item in designer.expertise
+              option(value='', data-icon=`${link.imgCDN}categories/${item.name}.jpg`) #{item.name}
+            label Images in select
+
         button.btn.waves-effect.waves-light(type='submit' class= `${colorTheme}`)
           | Buat
           i.material-icons.right send
