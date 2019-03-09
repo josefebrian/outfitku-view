@@ -217,8 +217,9 @@ router.post('/designers/:id', auth, async (req, res) => {
 router.post('/designers/:id/order', auth, async (req, res) => {
   try {
     const designer = await axios.get(apiServer + '/designers/' + req.params.id);
+    console.log(req.body);
 
-    const order = await axios.post(apiServer + '/orders/', { designer: req.params.id });
+    const order = await axios.post(apiServer + '/orders/', { designer: req.params.id, category: req.body.category });
 
     let pageVariables = Object.assign(defaultSiteValues, { user: req.user, designer: designer.data, order: order.data, upPageLevel: '../../' });
 
@@ -264,6 +265,79 @@ router.get('/designers/:id/orders/:orderId', auth, async (req, res) => {
     res.render('./designers/viewOrder', pageVariables);
   } catch (err) {
     res.status(err.response.status).send('error: ' + err.response.data)
+  };
+});
+
+router.get('/myOrder', auth, async (req, res) => {
+  try {
+    const orders = await axios.get(apiServer + '/orders/');
+
+    let day = new Array(7);
+    day[0] = "Sunday";
+    day[1] = "Monday";
+    day[2] = "Tuesday";
+    day[3] = "Wednesday";
+    day[4] = "Thursday";
+    day[5] = "Friday";
+    day[6] = "Saturday";
+
+    let month = new Array();
+    month[0] = "January";
+    month[1] = "February";
+    month[2] = "March";
+    month[3] = "April";
+    month[4] = "May";
+    month[5] = "June";
+    month[6] = "July";
+    month[7] = "August";
+    month[8] = "September";
+    month[9] = "October";
+    month[10] = "November";
+    month[11] = "December";
+
+    let pageVariables = Object.assign(defaultSiteValues, { user: req.user, orders: orders.data, upPageLevel: '../../../', day: day, month: month, select: false });
+
+    res.render('./designers/viewOrder', pageVariables);
+  } catch (err) {
+    res.status(err.response.status).send('error: ' + err.response.data)
+  };
+});
+
+router.get('/myOrder/:orderId', auth, async (req, res) => {
+  try {
+    const orders = await axios.get(apiServer + '/orders/');
+    const order = await axios.get(apiServer + '/orders/' + req.params.orderId);
+    console.log(order.data);
+
+    let day = new Array(7);
+    day[0] = "Sunday";
+    day[1] = "Monday";
+    day[2] = "Tuesday";
+    day[3] = "Wednesday";
+    day[4] = "Thursday";
+    day[5] = "Friday";
+    day[6] = "Saturday";
+
+    let month = new Array();
+    month[0] = "January";
+    month[1] = "February";
+    month[2] = "March";
+    month[3] = "April";
+    month[4] = "May";
+    month[5] = "June";
+    month[6] = "July";
+    month[7] = "August";
+    month[8] = "September";
+    month[9] = "October";
+    month[10] = "November";
+    month[11] = "December";
+
+    let pageVariables = Object.assign(defaultSiteValues, { user: req.user, order: order.data, orders: orders.data, upPageLevel: '../../../', day: day, month: month, select: true });
+
+    res.render('./designers/viewOrder', pageVariables);
+  } catch (err) {
+    // res.status(err.response.status).send('error: ' + err.response.data)
+    console.log(err);
   };
 });
 

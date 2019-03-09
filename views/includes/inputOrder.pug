@@ -6,10 +6,10 @@
       .container
         p Pilih kategori
         .input-field.col.s12.m6
-          select.icons
+          select(name='category')
             option(value='', disabled='', selected='') Kategori
             each item in designer.expertise
-              option(value='', data-icon=`${link.imgCDN}categories/${item.name}.jpg`) #{item.name}
+              option(value= `${item._id}`, data-icon=`${link.imgCDN}categories/${item.name}.jpg`) #{item.name}
             label Images in select
 
         button.btn.waves-effect.waves-light(type='submit' class= `${colorTheme}`)

@@ -1,4 +1,4 @@
 {
-    "APIServer": "http://localhost:3000/api",
+    "APIServer": "http://192.168.0.4:3000/api",
     "imgCDN": "http://192.168.0.4:3000/public/img/"
 }
