@@ -162,6 +162,22 @@ router.get('/designers/:id/admin', auth, async (req, res) => {
   };
 });
 
+router.get('/designers/:id/edit', auth, async (req, res) => {
+  try {
+    const designer = await axios.get(apiServer + '/designers/' + req.params.id);
+
+    let pageVariables = Object.assign(defaultSiteValues, { user: req.user, designer: designer.data, upPageLevel: '../../', postAction: `../../designers/${req.params.id}/edit` });
+    // console.log(req.user._id != designer.data.account.owner._id);
+
+    if (req.user._id != designer.data.account.owner._id) return res.status(403).send('unauthorized')
+
+    // res.send(templateItem.data)
+    res.render('./designers/designer_edit_detail', pageVariables);
+  } catch (err) {
+    res.status(err.response.status).send('error: ' + err.response.data)
+  };
+});
+
 router.post('/designers/:id/picture', [auth, upload.single('picture')], async (req, res) => {
   try {
     //kasih validation ada file/gak

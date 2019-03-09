@@ -1,0 +1,77 @@
+html(lang="en")
+  head 
+    include ../includes/head.pug
+    include ../includes/loginmodal.pug
+    include ../includes/script.pug
+    title #{siteName} - #{designer.businessName} Admin
+  body
+    include ../includes/header.pug
+    main
+      .container
+        h3.center Edit #{designer.businessName} 
+        form(action="/designers/"+designer._id+"/edit", method="post")
+          table.highlight.striped
+
+            tbody
+                tr
+                  th Gambar
+                  form(action="/designers/"+designer._id+"/picture" method="post" enctype="multipart/form-data")
+                    td 
+                      .row
+                        .col.s5
+                          a(href=`${link.imgCDN}/designers/${designer._id}/main/${designer.picture}` target="_blank")
+                            img(src=`${link.imgCDN}/designers/${designer._id}/main/${designer.picture}`, alt="gambar" height="12%" ) 
+                        .col.s7
+                          .file-field.input-field
+                            .btn(class= `${colorTheme}`)
+                              span file
+                                i.material-icons.right add_a_photo
+                              input(type='file' name='picture' accept='image/*' class= `${colorTheme}`)
+                            .file-path-wrapper
+                              input.file-path.validate(type='text')   
+                    td
+                      .row
+                        button.btn.waves-effect.waves-light(type='submit' class= `${colorTheme}`)
+                          | Upload
+                          i.material-icons.right send
+                tr
+                  th Nama
+                    td(colspan="2")
+                      input#businessName.validate(value=`${designer.businessName}` type='text')          
+                tr
+                  th Alamat
+                    td(colspan="2")
+                      input#businessAddress.validate(value=`${designer.businessAddress}` type='text')   
+                tr
+                  th Email
+                    td(colspan="2")
+                      input#businessEmail.validate(value=`${designer.businessEmail}` type='text')   
+                tr
+                  th Nama
+                    td(colspan="2")
+                      input#businessName.validate(value=`${designer.businessName}` type='text')   
+
+
+                tr
+                  th Keahlian
+                  td(colspan="2") 
+                    i hubungi CS Outfitku untuk mengubah keahlian.
+
+                  
+                tr
+                  th Akun Pengelola
+                  td #{designer.account.maintainers}
+                  td             
+
+      div#pesanan
+
+      div#transactions
+
+      br
+      .center
+        a.waves-effect.waves-light.btn( class= `${colorTheme}` href="/profile" ) Simpan
+          
+      br
+
+
+      include ../includes/footer.pug
