@@ -352,7 +352,15 @@ router.post('/designers/:id/orders/:orderId/messages/image', [auth, upload.singl
     res.status(err.response.status).send('error: ' + err.response.data)
   };
 });
+router.get('/about', async (req, res) => {
 
+
+
+
+  res.render('home/about', defaultSiteValues)
+
+
+});
 //FOR TESTING PURPOSE
 router.get('/template', async (req, res) => {
   const pageVariables = Object.assign(defaultSiteValues, {});

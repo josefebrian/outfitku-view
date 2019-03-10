@@ -13,7 +13,7 @@ html(lang="en")
           each order in orders
             if user._id == order.user._id || designerId == order.designer._id
               p
-                .collection.z-depth-1(style='border: 0px')
+                .collection.z-depth-1(style='border: 0px').hoverable
                   if order._id === paramsId
                     a(href='/myOrder/' + order._id class=`collection-item green lighten-2` )
                       b(style= 'color: #263238') #{order.designer.businessName}

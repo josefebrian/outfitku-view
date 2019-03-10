@@ -24,11 +24,13 @@ html(lang="en")
           .row#designerList
             each designer in designers
               .col.s6.m3
-                .card.small.hoverable(class= `${colorTheme}`)
-                  .card-image.center
-                    img(src=link.imgCDN+'designers/'+designer._id+'/main/'+designer.picture onerror="this.onerror=null;this.src='/public/img/site/no-image.png';")
-                  .card-action
-                    a(href='/designers/'+designer._id) #{designer.businessName}
+                .card.small.hoverable(class= `${colorTheme}` style='height: 20%;')
+                  a(href='/designers/'+designer._id)
+
+                    .card-image.center(style='width: 100%;max-height: 100%;')
+                      img(src=link.imgCDN+'designers/'+designer._id+'/main/'+designer.picture onerror="this.onerror=null;this.src='/public/img/site/no-image.png';")
+                    .card-action
+                      b.white-text #{designer.businessName}
           
 
       include ../includes/footer.pug
