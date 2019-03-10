@@ -218,19 +218,14 @@ router.post('/designers/:id/order', auth, async (req, res) => {
     const designer = await axios.get(apiServer + '/designers/' + req.params.id);
     console.log(req.body);
 
-    if (req.body.category == undefined) {
-      const order = await axios.post(apiServer + '/orders/', { designer: req.params.id });
-    } else {
-      const order = await axios.post(apiServer + '/orders/', { designer: req.params.id, category: req.body.category });
-    }
+    const order = await axios.post(apiServer + '/orders/', { designer: req.params.id, category: req.body.category });
+
 
     let pageVariables = Object.assign(defaultSiteValues, { user: req.user, designer: designer.data, order: order.data, upPageLevel: '../../' });
 
     res.render('./orders/createOrder', pageVariables)
   } catch (err) {
-    // res.status(err.response.status).send('error: ' + err.response.data)
-    console.log(err);
-
+    res.status(err.response.status).send('error: ' + err.response.data)
   };
 });
 
@@ -286,7 +281,8 @@ router.get('/myorder/:orderId', auth, async (req, res) => {
   try {
     const orders = await axios.get(apiServer + '/orders/');
     const order = await axios.get(apiServer + '/orders/' + req.params.orderId);
-    console.log(req.params.orderId);
+    const params = req.params.orderId
+    // console.log(order.data);
 
     let day = new Array(7);
     day[0] = "Sunday";
