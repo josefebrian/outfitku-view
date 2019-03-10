@@ -220,7 +220,6 @@ router.post('/designers/:id/order', auth, async (req, res) => {
 
     const order = await axios.post(apiServer + '/orders/', { designer: req.params.id, category: req.body.category });
 
-
     let pageVariables = Object.assign(defaultSiteValues, { user: req.user, designer: designer.data, order: order.data, upPageLevel: '../../' });
 
     res.render('./orders/createOrder', pageVariables)
@@ -310,6 +309,93 @@ router.get('/myorder/:orderId', auth, async (req, res) => {
     let pageVariables = Object.assign(defaultSiteValues, { user: req.user, order: order.data, orders: orders.data, upPageLevel: '../../../', day: day, month: month, select: true, paramsId: req.params.orderId });
 
     res.render('./orders/viewOrder', pageVariables);
+  } catch (err) {
+    // res.status(err.response.status).send('error: ' + err.response.data)
+    console.log(err);
+  };
+});
+
+router.get('/shoporder', auth, async (req, res) => {
+  try {
+    const orders = await axios.get(apiServer + '/orders/');
+
+    const designer = await axios.get(apiServer + '/designers/');
+    let designerId;
+
+    for (i in designer.data) {
+      if (req.user._id == designer.data[i].account.owner._id) {
+        designerId = designer.data[i]._id
+      }
+    }
+    // const customer = order.data.user._id;
+
+    let day = new Array(7);
+    day[0] = "Sunday";
+    day[1] = "Monday";
+    day[2] = "Tuesday";
+    day[3] = "Wednesday";
+    day[4] = "Thursday";
+    day[5] = "Friday";
+    day[6] = "Saturday";
+
+    let month = new Array();
+    month[0] = "January";
+    month[1] = "February";
+    month[2] = "March";
+    month[3] = "April";
+    month[4] = "May";
+    month[5] = "June";
+    month[6] = "July";
+    month[7] = "August";
+    month[8] = "September";
+    month[9] = "October";
+    month[10] = "November";
+    month[11] = "December";
+
+    let pageVariables = Object.assign(defaultSiteValues, { user: req.user, designerId: designerId, orders: orders.data, upPageLevel: '../../../', day: day, month: month, select: false });
+
+    // if (req.user._id != designer.data.account.owner._id && req.user._id != customer) return res.status(403).send('unauthorized')
+
+    res.render('./orders/viewOrderShop', pageVariables);
+  } catch (err) {
+    // res.status(err.response.status).send('error: ' + err.response.data)
+    console.log(err);
+  };
+});
+
+router.get('/shoporder/:orderId', auth, async (req, res) => {
+  try {
+    const orders = await axios.get(apiServer + '/orders/');
+    const order = await axios.get(apiServer + '/orders/' + req.params.orderId);
+    const params = req.params.orderId
+    // console.log(order.data);
+
+    let day = new Array(7);
+    day[0] = "Sunday";
+    day[1] = "Monday";
+    day[2] = "Tuesday";
+    day[3] = "Wednesday";
+    day[4] = "Thursday";
+    day[5] = "Friday";
+    day[6] = "Saturday";
+
+    let month = new Array();
+    month[0] = "January";
+    month[1] = "February";
+    month[2] = "March";
+    month[3] = "April";
+    month[4] = "May";
+    month[5] = "June";
+    month[6] = "July";
+    month[7] = "August";
+    month[8] = "September";
+    month[9] = "October";
+    month[10] = "November";
+    month[11] = "December";
+
+    let pageVariables = Object.assign(defaultSiteValues, { user: req.user, order: order.data, orders: orders.data, upPageLevel: '../../../', day: day, month: month, select: true, paramsId: req.params.orderId });
+
+    res.render('./orders/viewOrderShop', pageVariables);
   } catch (err) {
     // res.status(err.response.status).send('error: ' + err.response.data)
     console.log(err);

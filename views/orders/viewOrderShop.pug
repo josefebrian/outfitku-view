@@ -11,12 +11,12 @@ html(lang="en")
       .row.blue-grey.lighten-1
         .col(class='s3 m3 l3 scrollable' style='margin-top:7px;').blue-grey.lighten-1
           each order in orders
-            if user._id == order.user._id
+            if designerId == order.designer._id
               p
                 .collection.z-depth-1(style='border: 0px').hoverable
                   if order._id === paramsId
-                    a(href='/myOrder/' + order._id class=`collection-item green lighten-2`)#scoll
-                      b(style= 'color: #263238') #{order.designer.businessName}
+                    a(href='/shoporder/' + order._id class=`collection-item green lighten-2` )
+                      b(style= 'color: #263238') #{order.user.name}
                       if order.chatLog.length > 0
                         if order.chatLog[order.chatLog.length - 1].message.messageType == 'text'
                           p(style='color: #263238') #{order.chatLog[order.chatLog.length - 1].from.name}: #{order.chatLog[order.chatLog.length - 1].message.content}
@@ -24,15 +24,15 @@ html(lang="en")
                           p(style='color: #607d8b ') #{order.chatLog[order.chatLog.length - 1].from.name}: Photo
                             i.material-icons.left image 
                   else 
-                    a(href='/myOrder/' + order._id class=`collection-item blue-grey lighten-4` )
-                      b(style= 'color: #263238') #{order.designer.businessName}
+                    a(href='/shoporder/' + order._id class=`collection-item blue-grey lighten-4` )
+                      b(style= 'color: #263238') #{order.user.name}
                       if order.chatLog.length > 0
                         if order.chatLog[order.chatLog.length - 1].message.messageType == 'text'
                           p(style='color: #263238') #{order.chatLog[order.chatLog.length - 1].from.name}: #{order.chatLog[order.chatLog.length - 1].message.content}
                         else
-                          p(style='color: #607d8b ') #{order.chatLog[order.chatLog.length - 1].from.name}: Photo 
-                            i.material-icons image
-            
+                          p(style='color: #607d8b ') #{order.chatLog[order.chatLog.length - 1].from.name}: Photo
+                            i.material-icons.left image 
+              
               
         .col(class='s7 m7 l7 scrollable' style='margin-top:15px;')#box.blue-grey.lighten-1
               if select
