@@ -37,3 +37,9 @@ main {
 .clockpicker-canvas line { stroke: #7f2ca3 !important; }
 .clockpicker-canvas-bearing { fill: #6d4e7a !important; }
 .clockpicker-canvas-bg { fill: #6d4e7a !important; }
+
+/* .card-image{
+  height: 200px;
+  overflow: hidden;
+  max-height: 100%
+} */
