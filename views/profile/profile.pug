@@ -23,7 +23,9 @@ html(lang="en")
         li.collection-item
           p(style="float:left;width: 10%;min-width: 50px; margin-right: 1em")  Alamat 
           p=address
-        
+        li.collection-item
+          p(style="float:left;width: 10%;min-width: 50px; margin-right: 1em")  Transaksi
+          
       .section
       div#pesanan
 
@@ -52,7 +54,10 @@ html(lang="en")
       br    
 
       div#transactions
-
+        .center
+          a.waves-effect.waves-light.btn( class= `${colorTheme}` href="/myorder" ) Transaksi
+            i.material-icons.right shopping_cart
+       
       br
       .center
         button.waves-effect.waves-light.btn( class= `${colorTheme}`)

@@ -111,7 +111,6 @@ router.get('/profile', auth, async (req, res) => {
       return res.render('./profile/profile', pageVariables);
     } else return res.render('./profile/profile', pageVariables);
   } catch (err) {
-    console.log(ownerOf.data);
     res.status(err.response.status).send(err.response.data)
   };
 });
@@ -229,7 +228,7 @@ router.post('/designers/:id/order', auth, async (req, res) => {
   };
 });
 
-router.get('/myOrder', auth, async (req, res) => {
+router.get('/myorder', auth, async (req, res) => {
   try {
     const orders = await axios.get(apiServer + '/orders/');
 
@@ -362,20 +361,6 @@ router.get('/templateRoute', auth, async (req, res) => {
   } catch (err) {
     res.status(err.response.status).send('error: ' + err.response.data)
   };
-});
-
-router.get('/myorder', auth, async (req, res) => {
-
-
-
-  res.render('./---------------------', pageVariables);
-});
-
-router.get('/myorder/:id', auth, async (req, res) => {
-
-  let orderId = req.params.id;
-
-  res.render('./----------------------', Object.assign(pageVariables, { orderId: req.params.id }));
 });
 
 module.exports = router;
