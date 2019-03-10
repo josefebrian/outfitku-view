@@ -11,7 +11,7 @@ html(lang="en")
       .row
         .col(class='s3 m3 l3 scrollable' style='margin-top:7px;')
           each order in orders
-            if user._id == order.user._id
+            if user._id == order.user._id || designerId == order.designer._id
               p
                 .collection
                   a(href='/myOrder/' + order._id class=`collection-item ${colorTheme}` style='border-radius:10px;')
