@@ -1,3 +1,5 @@
+let designerBanner;
+
 function materializeInit() {
   M.Parallax.init(document.querySelectorAll('.parallax'));
   M.Sidenav.init(document.querySelectorAll('.sidenav'));
@@ -21,6 +23,6 @@ function materializeInit() {
   M.ScrollSpy.init(document.querySelectorAll('.scrollspy'));
 }
 
-document.addEventListener('DOMContentLoaded', async function() {
+document.addEventListener('DOMContentLoaded', async function () {
   await materializeInit();
 });
