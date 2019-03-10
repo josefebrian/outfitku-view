@@ -398,4 +398,18 @@ router.get('/templateRoute', auth, async (req, res) => {
   };
 });
 
+router.get('/myorder', auth, async (req, res) => {
+
+
+
+  res.render('./---------------------', pageVariables);
+});
+
+router.get('/myorder/:id', auth, async (req, res) => {
+
+  let orderId = req.params.id;
+
+  res.render('./----------------------', Object.assign(pageVariables, { orderId: req.params.id }));
+});
+
 module.exports = router;
