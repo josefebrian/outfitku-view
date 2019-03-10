@@ -37,14 +37,15 @@ html(lang="en")
                 
                   if type == 'text'
                     if isUser
-                      .col(class='s12 m8 l3.5 left')
-                        .card-panel.teal.left-align(class='textLeft')
-                          b #{message.from.name}
-                          p #{message.message.content}
-                          //- p #{weekday}, #{date.getDate()} #{m} ////format day, date month
-                          p #{time}
+                      .row
+                        .col(class='s12 m8 left')
+                          .card-panel.teal.left-align(class='textLeft')
+                            b #{message.from.name}
+                            p #{message.message.content}
+                            //- p #{weekday}, #{date.getDate()} #{m} ////format day, date month
+                            p #{time}
                     else
-                      .col(class='s12 m8 l3.5 right')
+                      .col(class='s12 m8 right')
                         .card-panel.blue.right-align(class='textRight')
                           b #{message.from.name}
                           p #{message.message.content}
@@ -52,14 +53,14 @@ html(lang="en")
                           p #{time}   
                   else
                     if isUser
-                      .col(class='s12 m8 l3.5 left')
+                      .col(class='s12 m8 left')
                         .card-panel.teal.left-align(class='textLeft')
                           b #{message.from.name}
                           img.materialboxed(width='50%', src=link.imgCDN+'orders/'+order._id+'/messages/'+message.message.content)
                           //- p #{weekday}, #{date.getDate()} #{m}
                           p #{time}   
                     else
-                      .col(class='s12 m8 l3.5 right')
+                      .col(class='s12 m8 right')
                         .card-panel.blue.right-align(class='textRight')
                           b #{message.from.name}
                             row.right-align

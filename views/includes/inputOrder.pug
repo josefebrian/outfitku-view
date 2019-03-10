@@ -10,7 +10,15 @@
             option(value='', disabled='', selected='') Kategori
             each item in designer.expertise
               option(value= `${item._id}`, data-icon=`${link.imgCDN}categories/${item.name}.jpg`) #{item.name}
-            label Images in select
+        p Masukan Gambar  
+          .col.s7
+            .file-field.input-field
+              .btn(class= `${colorTheme}`)
+                span file
+                  i.material-icons.right add_a_photo
+                input(type='file' name='picture' accept='image/*' class= `${colorTheme}`)
+              .file-path-wrapper
+                input.file-path.validate(type='text')   
 
         button.btn.waves-effect.waves-light(type='submit' class= `${colorTheme}`)
           | Buat
