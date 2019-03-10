@@ -218,7 +218,11 @@ router.post('/designers/:id/order', auth, async (req, res) => {
     const designer = await axios.get(apiServer + '/designers/' + req.params.id);
     console.log(req.body);
 
-    const order = await axios.post(apiServer + '/orders/', { designer: req.params.id, category: req.body.category });
+    if (req.body.category == undefined) {
+      const order = await axios.post(apiServer + '/orders/', { designer: req.params.id });
+    } else {
+      const order = await axios.post(apiServer + '/orders/', { designer: req.params.id, category: req.body.category });
+    }
 
     let pageVariables = Object.assign(defaultSiteValues, { user: req.user, designer: designer.data, order: order.data, upPageLevel: '../../' });
 
@@ -232,7 +236,14 @@ router.get('/myorder', auth, async (req, res) => {
   try {
     const orders = await axios.get(apiServer + '/orders/');
 
-    // const designer = await axios.get(apiServer + '/designers/' + req.params.id);
+    const designer = await axios.get(apiServer + '/designers/');
+    let designerId;
+
+    for (i in designer.data) {
+      if (req.user._id == designer.data[i].account.owner._id) {
+        designerId = designer.data[i]._id
+      }
+    }
     // const customer = order.data.user._id;
 
     let day = new Array(7);
@@ -258,17 +269,18 @@ router.get('/myorder', auth, async (req, res) => {
     month[10] = "November";
     month[11] = "December";
 
-    let pageVariables = Object.assign(defaultSiteValues, { user: req.user, orders: orders.data, upPageLevel: '../../../', day: day, month: month, select: false });
+    let pageVariables = Object.assign(defaultSiteValues, { user: req.user, designerId: designerId, orders: orders.data, upPageLevel: '../../../', day: day, month: month, select: false });
 
     // if (req.user._id != designer.data.account.owner._id && req.user._id != customer) return res.status(403).send('unauthorized')
 
     res.render('./orders/viewOrder', pageVariables);
   } catch (err) {
-    res.status(err.response.status).send('error: ' + err.response.data)
+    // res.status(err.response.status).send('error: ' + err.response.data)
+    console.log(err);
   };
 });
 
-router.get('/myOrder/:orderId', auth, async (req, res) => {
+router.get('/myorder/:orderId', auth, async (req, res) => {
   try {
     const orders = await axios.get(apiServer + '/orders/');
     const order = await axios.get(apiServer + '/orders/' + req.params.orderId);
