@@ -8,23 +8,23 @@ html(lang="en")
   body
     include ../includes/header.pug
     main
-      .row
-        .col(class='s3 m3 l3 scrollable' style='margin-top:7px;')
+      .row.blue-grey.lighten-1
+        .col(class='s3 m3 l3 scrollable' style='margin-top:7px;').blue-grey.lighten-1
           each order in orders
             if user._id == order.user._id || designerId == order.designer._id
               p
                 .collection
-                  a(href='/myOrder/' + order._id class=`collection-item ${colorTheme}` style='border-radius:10px;')
-                    b(style= 'color: #ffffff') #{order.designer.businessName}
+                  a(href='/myOrder/' + order._id class=`collection-item blue-grey lighten-4` )
+                    b(style= 'color: #263238') #{order.designer.businessName}
                     if order.chatLog.length > 0
                       if order.chatLog[order.chatLog.length - 1].message.messageType == 'text'
-                        p(style='color: #ffffff') #{order.chatLog[order.chatLog.length - 1].message.content}
+                        p(style='color: #263238') #{order.chatLog[order.chatLog.length - 1].message.content}
                       else
-                        p(style='color: #ffffff') Photo
+                        p(style='color: #607d8b ') Photo
                           i.material-icons.left image 
               
               
-        .col(class='s7 m7 l7 scrollable' style='margin-top:15px;')#box
+        .col(class='s7 m7 l7 scrollable' style='margin-top:15px;')#box.blue-grey.lighten-1
               if select
                 each message in order.chatLog
                   - let type = message.message.messageType
@@ -39,14 +39,14 @@ html(lang="en")
                     if isUser
                       .row
                         .col(class='s12 m8 left')
-                          .card-panel.teal.left-align(class='textLeft')
+                          .card-panel.teal.left-align(class='textLeft').blue-grey.lighten-5
                             b #{message.from.name}
                             p #{message.message.content}
                             //- p #{weekday}, #{date.getDate()} #{m} ////format day, date month
                             p #{time}
                     else
                       .col(class='s12 m8 right')
-                        .card-panel.blue.right-align(class='textRight')
+                        .card-panel.blue.right-align(class='textRight').green.lighten-2
                           b #{message.from.name}
                           p #{message.message.content}
                           //- p #{weekday}, #{date.getDate()} #{m}
@@ -54,14 +54,14 @@ html(lang="en")
                   else
                     if isUser
                       .col(class='s12 m8 left')
-                        .card-panel.teal.left-align(class='textLeft')
+                        .card-panel.teal.left-align(class='textLeft').blue-grey.lighten-5
                           b #{message.from.name}
                           img.materialboxed(width='50%', src=link.imgCDN+'orders/'+order._id+'/messages/'+message.message.content)
                           //- p #{weekday}, #{date.getDate()} #{m}
                           p #{time}   
                     else
                       .col(class='s12 m8 right')
-                        .card-panel.blue.right-align(class='textRight')
+                        .card-panel.blue.right-align(class='textRight').green.lighten-2
                           b #{message.from.name}
                             row.right-align
                               img.materialboxed(width='50%' style='margin-left:50%;' src=link.imgCDN+'orders/'+order._id+'/messages/'+message.message.content)
@@ -70,7 +70,7 @@ html(lang="en")
         .col(class='s2 m2 l2' style='margin-top:15px;')
           if select
             if order.category != undefined
-              b Category : #{order.category.name}
+              b.white-text Category : #{order.category.name}
             else
               b Category :
       if select      

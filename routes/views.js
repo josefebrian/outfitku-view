@@ -228,7 +228,9 @@ router.post('/designers/:id/order', auth, async (req, res) => {
 
     res.render('./orders/createOrder', pageVariables)
   } catch (err) {
-    res.status(err.response.status).send('error: ' + err.response.data)
+    // res.status(err.response.status).send('error: ' + err.response.data)
+    console.log(err);
+
   };
 });
 
@@ -284,7 +286,7 @@ router.get('/myorder/:orderId', auth, async (req, res) => {
   try {
     const orders = await axios.get(apiServer + '/orders/');
     const order = await axios.get(apiServer + '/orders/' + req.params.orderId);
-    console.log(order.data);
+    console.log(req.params.orderId);
 
     let day = new Array(7);
     day[0] = "Sunday";
@@ -309,7 +311,7 @@ router.get('/myorder/:orderId', auth, async (req, res) => {
     month[10] = "November";
     month[11] = "December";
 
-    let pageVariables = Object.assign(defaultSiteValues, { user: req.user, order: order.data, orders: orders.data, upPageLevel: '../../../', day: day, month: month, select: true });
+    let pageVariables = Object.assign(defaultSiteValues, { user: req.user, order: order.data, orders: orders.data, upPageLevel: '../../../', day: day, month: month, select: true, paramsId: req.params.orderId });
 
     res.render('./orders/viewOrder', pageVariables);
   } catch (err) {
